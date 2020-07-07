@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 
 const auth = require("./routes/auth");
 const customers = require("./routes/customers");
@@ -9,7 +9,7 @@ const farmers = require("./routes/farmers");
 const app = express();
 
 //load env vars
-dotenv.config({ path: "./config/config.env" });
+require("dotenv").config();
 
 app.use(express.json());
 
