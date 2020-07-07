@@ -12,7 +12,7 @@ const orderSchema = new Schema({
     required: true,
     ref: "User",
   },
-  products: [],
+  products: [{ item: [] }],
   payment: Object,
   shipping: Object,
   orderedAt: {

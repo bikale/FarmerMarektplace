@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
 const auth = require("./routes/auth");
+const customers = require("./routes/customers");
+const farmers = require("./routes/farmers");
 
 const app = express();
 
@@ -13,6 +15,8 @@ app.use(express.json());
 
 //Mount router
 app.use("/api/farmermarket/v1/auth", auth);
+app.use("/api/farmermarket/v1/farmers", farmers);
+app.use("/api/farmermarket/v1/customers", customers);
 
 //404 handler
 app.use((req, res, next) => {

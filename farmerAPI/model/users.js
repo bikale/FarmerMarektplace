@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { default: farmers } = require("./farmers");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -20,14 +21,14 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    default: "farmer",
+    default: "customer", //customer
   },
   customerInfo: {
     cart: [
       {
         productId: {
           type: Schema.Types.ObjectId,
-          ref: "User.farmerInfo.products",
+          ref: "Product",
           required: true,
         },
         quantity: { type: Number, required: true },
@@ -38,26 +39,9 @@ const userSchema = new Schema({
     rating: { type: Number, default: 1 },
     products: [
       {
-        title: {
-          type: String,
-          required: true,
-        },
-        photo: {
-          type: String,
-          required: true,
-        },
-        price: {
-          type: Number,
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
-        description: {
-          type: String,
-          required: true,
-        },
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+        required: true,
       },
     ],
   },
