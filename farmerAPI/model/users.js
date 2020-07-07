@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { default: farmers } = require("./farmers");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({

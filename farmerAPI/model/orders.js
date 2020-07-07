@@ -12,7 +12,8 @@ const orderSchema = new Schema({
     required: true,
     ref: "User",
   },
-  products: [{ item: [] }],
+  // products: { item: [{quantity:Number,price:Number}], },
+  products: [String],
   payment: Object,
   shipping: Object,
   orderedAt: {
