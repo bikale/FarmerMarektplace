@@ -1,6 +1,6 @@
 const User = require("../model/users.js");
 const Order = require("../model/orders");
-
+const { sendmail } = require("../utils/sendMail");
 // @desc      Add item to the cart
 // @route     Post /cart
 // @access    Public
@@ -45,12 +45,15 @@ exports.getUserCart = async (req, res, next) => {
 
 exports.placeOrder = async (req, res, next) => {
   try {
-    const order = await Order.create({
-      customer: "5f0417ceaec98ec6367e5f2c",
-      farmer: "5f03f8e2c3b2d99ffec3a81c",
-      products: ["product1", "product2"],
-    });
-    res.status(200).json({ success: true, data: order });
+    // const order = await Order.create({
+    //   customer: "5f0417ceaec98ec6367e5f2c",
+    //   farmer: "5f03f8e2c3b2d99ffec3a81c",
+    //   products: ["product1", "product2"],
+    // });
+
+    sendmail();
+
+    res.status(200).json({ success: true, data: "order created" });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
