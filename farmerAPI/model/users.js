@@ -22,6 +22,8 @@ const userSchema = new Schema({
     type: String,
     default: "customer", //customer
   },
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
   customerInfo: {
     cart: [
       {

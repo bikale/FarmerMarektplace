@@ -1,9 +1,10 @@
 const User = require("../model/users.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 // @desc    Create User
-// @route   Post /farmermarket/auth/users
+// @route   Post api/v1/farmermarket/auth/users
 // @access  Public
 
 exports.signUp = async (req, res, next) => {
@@ -37,7 +38,7 @@ exports.signUp = async (req, res, next) => {
 };
 
 // @desc    User login
-// @route   Post /farmermarket/auth/login
+// @route   Post api/v1/farmermarket/auth/login
 // @access  Public
 
 exports.login = async (req, res, next) => {
@@ -68,6 +69,68 @@ exports.login = async (req, res, next) => {
     }
 
     sendTokenResponse(user, res); // call function to generate token and respond
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "something went wrong",
+    });
+  }
+};
+
+// @desc      Log user out / clear cookie
+// @route     GET /api/v1/farmermarket/auth/logout
+// @access    Private
+
+exports.logout = async (req, res, next) => {
+  res.cookie("token", "none", {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    data: {},
+  });
+};
+
+// @desc      Forgot password
+// @route     POST /api/v1/farmermarket/auth/forgotpassword
+// @access    Public
+exports.forgotPassword = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "There is no user with this email",
+      });
+    }
+    const resetToken = crypto.randomBytes(20).toString("hex"); //
+
+    // Hash Token and set to resetPasswordToken field in db
+    const resetPasswordToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    // Set expire
+    const resetPasswordExpire = Date.now() + 10 * 60 * 1000; // 10 minute
+
+    await User.updateOne(
+      { email: req.body.email },
+      { $set: { resetPasswordToken, resetPasswordExpire } }
+    );
+
+    // Create reset url
+    const resetUrl = `${req.protocol}://${req.get(
+      "host"
+    )}/api/v1/farmermarket/auth/resetpassword/${resetToken}`;
+
+    const message = `You are receiving this email because you (or someone else) has requested the reset of a password.
+                     Please make a PUT request to: \n\n ${resetUrl}`;
+
+    res.status(200).json({ success: true, data: message });
   } catch (err) {
     res.status(500).json({
       success: false,
