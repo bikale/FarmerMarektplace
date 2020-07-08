@@ -1,4 +1,5 @@
-farmerAPI/node_modules
-farmerAPI/.env
+farmermarketAPI/node_modules
+farmermarketAPI/.env
+farmermarketAPI/.vscode
 mobile/node_modules
 web/node_modules
