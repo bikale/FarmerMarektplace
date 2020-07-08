@@ -1,8 +1,9 @@
 const User = require("../model/users.js");
 const Order = require("../model/orders");
 const { sendmail } = require("../utils/sendMail");
+
 // @desc      Add item to the cart
-// @route     Post /cart
+// @route     Post /farmermarket/customers/cart
 // @access    Public
 
 exports.addToCart = async (req, res, next) => {
@@ -24,7 +25,7 @@ exports.addToCart = async (req, res, next) => {
 };
 
 // @desc      Get  cart list
-// @route     GET /carts
+// @route     GET /farmermarket/customers/carts
 // @access    Public
 
 exports.getUserCart = async (req, res, next) => {
@@ -40,7 +41,7 @@ exports.getUserCart = async (req, res, next) => {
 };
 
 // @desc      Place order for user
-// @route     Post /orders
+// @route     Post /farmermarket/customers/orders
 // @access    Private
 
 exports.placeOrder = async (req, res, next) => {
@@ -60,7 +61,7 @@ exports.placeOrder = async (req, res, next) => {
 };
 
 // @desc      Get order history
-// @route     Get /orders
+// @route     Get /farmermarket/customers/orders
 // @access    Private
 
 exports.orderHistory = async (req, res, next) => {

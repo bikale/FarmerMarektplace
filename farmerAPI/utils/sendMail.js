@@ -19,6 +19,6 @@ exports.sendmail = async () => {
     html: "<b>Hello world?</b>", // html body
   };
   // send mail with defined transport object
-  let info = await transporter.sendMail(mailOptions);
+  const info = await transporter.sendMail(mailOptions);
   console.log("Message sent: %s", info.messageId);
 };

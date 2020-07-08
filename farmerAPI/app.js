@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 // const dotenv = require("dotenv");
 
 const auth = require("./routes/auth");
@@ -13,10 +14,13 @@ require("dotenv").config();
 
 app.use(express.json());
 
+// Cookie parser
+app.use(cookieParser());
+
 //Mount router
-app.use("/api/farmermarket/v1/auth", auth);
-app.use("/api/farmermarket/v1/farmers", farmers);
-app.use("/api/farmermarket/v1/customers", customers);
+app.use("/api/v1/farmermarket/auth", auth);
+app.use("/api/v1/farmermarket/farmers", farmers);
+app.use("/api/v1/farmermarket/customers", customers);
 
 //404 handler
 app.use((req, res, next) => {
