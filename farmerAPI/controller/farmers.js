@@ -3,8 +3,9 @@ const Product = require("../model/products");
 const Order = require("../model/orders");
 
 // @desc    Create Product
-// @route   Post /products
+// @route   Post /farmermarket/farmers/products
 // @access  Private
+
 exports.addProduct = async (req, res) => {
   try {
     let product = await Product.create(req.body);
@@ -20,7 +21,7 @@ exports.addProduct = async (req, res) => {
 };
 
 // @desc      Get customers orders
-// @route     Get /orders
+// @route     Get /farmermarket/farmers/orders
 // @access    Private
 
 exports.checkOrders = async (req, res) => {
@@ -32,7 +33,7 @@ exports.checkOrders = async (req, res) => {
   }
 };
 // @desc      Post update order status pending =>r eady => complete
-// @route     Post /orders/:order_number
+// @route     Post /farmermarket/farmers/orders/:order_number
 // @access    Private
 
 exports.updateOrder = async (req, res) => {
