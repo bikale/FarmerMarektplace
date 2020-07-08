@@ -3,13 +3,12 @@ const Product = require("../model/products");
 const Order = require("../model/orders");
 
 // @desc    Create Product
-// @route   Post /farmermarket/farmers/products
+// @route   Post /api/v1/farmermarket/farmers/products
 // @access  Private
 
 exports.addProduct = async (req, res) => {
   try {
     let product = await Product.create(req.body);
-
     await User.updateOne(
       { _id: "5f03f8e2c3b2d99ffec3a81c" },
       { $push: { "farmerInfo.products": product._id } }
@@ -21,7 +20,7 @@ exports.addProduct = async (req, res) => {
 };
 
 // @desc      Get customers orders
-// @route     Get /farmermarket/farmers/orders
+// @route     Get /api/v1/farmermarket/farmers/orders
 // @access    Private
 
 exports.checkOrders = async (req, res) => {
@@ -33,7 +32,7 @@ exports.checkOrders = async (req, res) => {
   }
 };
 // @desc      Post update order status pending =>r eady => complete
-// @route     Post /farmermarket/farmers/orders/:order_number
+// @route     Post /api/v1/farmermarket/farmers/orders/:order_number
 // @access    Private
 
 exports.updateOrder = async (req, res) => {
