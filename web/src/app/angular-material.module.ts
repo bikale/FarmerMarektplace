@@ -8,6 +8,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
 import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
   imports: [
@@ -19,6 +21,8 @@ import { MatGridListModule } from "@angular/material/grid-list";
     MatListModule,
     MatCardModule,
     MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     MatButtonModule,
@@ -28,6 +32,8 @@ import { MatGridListModule } from "@angular/material/grid-list";
     MatListModule,
     MatCardModule,
     MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
 })

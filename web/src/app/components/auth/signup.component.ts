@@ -2,21 +2,21 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
+  selector: "app-signup",
+  templateUrl: "./signup.component.html",
+  styleUrls: ["./signup.component.css"],
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
   hide = true;
-  loginform;
+  sign_up_form;
   constructor(formbuilder: FormBuilder) {
-    this.loginform = formbuilder.group({
+    this.sign_up_form = formbuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password: ["", Validators.required],
     });
   }
   ngOnInit(): void {}
-  onLogin() {
-    console.log(this.loginform.value);
+  onsignUp() {
+    console.log(this.sign_up_form.value);
   }
 }

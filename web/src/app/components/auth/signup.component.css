@@ -4,7 +4,7 @@ body {
   background-color: #7e8e9e;
   min-height: 100vh;
 }
-.login-card {
+.register-card {
   overflow: hidden;
   top: 50%;
   min-width: 50%;
@@ -21,19 +21,19 @@ body {
 mat-grid-tile {
   /* background: linear-gradient(#7e8e9e); */
 }
-.login-panel-right {
+.register-panel-right {
   background-image: url(https://cdn.pixabay.com/photo/2014/08/24/06/04/fruit-426002_960_720.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-.login-form {
+.register-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
 }
 
-.login-form-full-width {
+.register-form-full-width {
   width: 100%;
 }
