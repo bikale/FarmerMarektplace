@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { FormBuilder, Validators, FormControl } from "@angular/forms";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-signup",
@@ -11,12 +12,37 @@ export class SignupComponent implements OnInit {
   sign_up_form;
   constructor(formbuilder: FormBuilder) {
     this.sign_up_form = formbuilder.group({
-      email: ["", Validators.compose([Validators.required, Validators.email])],
-      password: ["", Validators.required],
+      firstname: ["", Validators.required],
+      lastname: ["", Validators.required],
+      email: [
+        "",
+        Validators.compose([
+          Validators.required,
+          Validators.email,
+          this.emailExistValidator,
+        ]),
+      ],
+      createpassword: ["", Validators.required],
+      confirmpassword: [
+        "",
+        [Validators.required, this.confirmPasswordValidator],
+      ],
     });
   }
   ngOnInit(): void {}
   onsignUp() {
     console.log(this.sign_up_form.value);
+  }
+
+  confirmPasswordValidator = (
+    control: FormControl
+  ): { [s: string]: boolean } => {
+    if (control.value === this.sign_up_form?.value.createpassword) {
+      return null;
+    }
+    return { invalid: true };
+  };
+  emailExistValidator(control: FormControl): Promise<any> | Observable<any> {
+    return null;
   }
 }

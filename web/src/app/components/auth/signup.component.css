@@ -3,6 +3,7 @@ body {
   padding: 0;
   background-color: #7e8e9e;
   min-height: 100vh;
+  font-size: 0.9rem;
 }
 .register-card {
   overflow: hidden;
@@ -30,10 +31,15 @@ mat-grid-tile {
 
 .register-form {
   min-width: 150px;
-  max-width: 500px;
+  max-width: 400px;
   width: 100%;
+  padding: 0%;
 }
 
 .register-form-full-width {
   width: 100%;
+  padding: 0%;
+}
+td {
+  padding-right: 8px;
 }
