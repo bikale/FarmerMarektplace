@@ -37,6 +37,34 @@ exports.signUp = async (req, res, next) => {
   }
 };
 
+// @desc    Check email already exist
+// @route   get api/v1/farmermarket/auth/users/:email
+// @access  Public
+
+exports.checkEmailExist = async (req, res, next) => {
+  try {
+    console.log(req.params.email);
+    const user = await User.findOne({ email: req.params.email });
+
+    if (user) {
+      res.status(200).json({
+        success: false,
+        message: "user already exist",
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: "user not exist",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "something went wrong",
+    });
+  }
+};
+
 // @desc    User login
 // @route   Post api/v1/farmermarket/auth/login
 // @access  Public

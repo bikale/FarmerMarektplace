@@ -1,0 +1,65 @@
+<body>
+  <mat-card class="login-card">
+    <mat-grid-list cols="5" rowHeight="70vh">
+      <mat-grid-tile colspan="3" class="login-panel-right">
+        Welcome to Farmer market
+        <mat-icon>market</mat-icon>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2">
+        <form [formGroup]="loginform" (ngSubmit)="onLogin()" class="login-form">
+          <p>Please enter your email and password</p>
+
+          <p>
+            <mat-form-field appearance="outline" class="login-form-full-width">
+              <mat-label>Enter your email</mat-label>
+              <input
+                matInput
+                placeholder="Ex. email@example.com"
+                formControlName="email"
+              />
+              <mat-icon matSuffix>email</mat-icon>
+
+              <mat-error
+                *ngIf="
+                  loginform.get('email').hasError('email') &&
+                  !loginform.get('email').hasError('required')
+                "
+              >
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="loginform.get('email').hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field appearance="outline" class="login-form-full-width">
+              <mat-label>Enter your password</mat-label>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                formControlName="password"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+
+              <mat-error *ngIf="loginform.get('password').hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </p>
+          <button mat-flat-button color="primary" type="submit">login</button>
+        </form>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</body>

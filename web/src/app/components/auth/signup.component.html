@@ -1,0 +1,174 @@
+<body>
+  <mat-card class="register-card">
+    <mat-grid-list cols="4" rowHeight="70vh">
+      <mat-grid-tile colspan="2">
+        <form
+          [formGroup]="sign_up_form"
+          (ngSubmit)="onsignUp()"
+          class="register-form"
+        >
+          <table class="register-form-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <mat-form-field class="register-form-full-width">
+                  <mat-label>First name</mat-label>
+                  <input
+                    matInput
+                    placeholder="Ex. Abebe"
+                    formControlName="firstname"
+                  />
+                  <mat-error
+                    *ngIf="sign_up_form.get('firstname').hasError('required')"
+                  >
+                    Firstname is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field class="register-form-full-width">
+                  <mat-label>Last name</mat-label>
+                  <input
+                    matInput
+                    placeholder="Ex. Bikila"
+                    formControlName="lastname"
+                  />
+                  <mat-error
+                    *ngIf="sign_up_form.get('lastname').hasError('required')"
+                  >
+                    Lastname is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+          </table>
+
+          <p>
+            <mat-form-field
+              appearance="outline"
+              class="register-form-full-width"
+            >
+              <mat-label>Enter your email</mat-label>
+              <input
+                matInput
+                placeholder="Ex. email@example.com"
+                formControlName="email"
+              />
+              <mat-icon matSuffix>email</mat-icon>
+
+              <mat-error
+                *ngIf="
+                  sign_up_form.get('email').hasError('email') &&
+                  !sign_up_form.get('email').hasError('required')
+                "
+              >
+                Please enter a valid email address
+              </mat-error>
+
+              <!-- check email exist  -->
+              <mat-error
+                *ngIf="
+                  sign_up_form.get('email').hasError('emailexist') &&
+                  !sign_up_form.get('email').hasError('email') &&
+                  !sign_up_form.get('email').hasError('required')
+                "
+              >
+                <strong>Email already exist</strong>
+              </mat-error>
+
+              <!-- checking availablity exist  -->
+              <!-- <mat-error *ngIf="sign_up_form.pending">
+                <strong> checking email availablity </strong>
+              </mat-error> -->
+
+              <mat-error *ngIf="sign_up_form.get('email').hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field
+              appearance="outline"
+              class="register-form-full-width"
+            >
+              <mat-label>Create password</mat-label>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                formControlName="password"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+
+              <mat-error
+                *ngIf="sign_up_form.get('password').hasError('required')"
+              >
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </p>
+          <p>
+            <mat-form-field
+              appearance="outline"
+              class="register-form-full-width"
+            >
+              <mat-label>Confirm password</mat-label>
+              <input
+                matInput
+                [type]="hide ? 'password' : 'text'"
+                formControlName="confirmpassword"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide"
+              >
+                <mat-icon>{{
+                  hide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+
+              <mat-error
+                *ngIf="sign_up_form.get('confirmpassword').hasError('required')"
+              >
+                Confirm password is <strong>required</strong>
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  sign_up_form.get('confirmpassword').hasError('invalid') &&
+                  !sign_up_form.get('confirmpassword').hasError('required')
+                "
+              >
+                Password <strong>do not match</strong>
+              </mat-error>
+            </mat-form-field>
+          </p>
+
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="!sign_up_form.valid"
+          >
+            register
+          </button>
+        </form>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2" class="register-panel-right">
+        Welcome to Farmer market
+        <mat-icon>market</mat-icon>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</body>

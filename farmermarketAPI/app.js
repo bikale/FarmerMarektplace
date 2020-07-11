@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 // const dotenv = require("dotenv");
 
 const auth = require("./routes/auth");
@@ -13,6 +14,9 @@ const app = express();
 require("dotenv").config();
 
 app.use(express.json());
+
+//allow cors policy
+app.use(cors());
 
 // Cookie parser
 app.use(cookieParser());
