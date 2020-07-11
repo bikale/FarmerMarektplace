@@ -26,7 +26,7 @@ import {
   delay,
   flatMap,
 } from "rxjs/operators";
-import { AccountService } from "src/app/services/account.service";
+import { AuthService } from "../../services/auth.service";
 import { HttpClient } from "@angular/common/http";
 
 @Component({
@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
   private searchUpdated = new Subject();
   constructor(
     formbuilder: FormBuilder,
-    private accountService: AccountService,
+    private accountService: AuthService,
     private http: HttpClient
   ) {
     this.sign_up_form = formbuilder.group({
