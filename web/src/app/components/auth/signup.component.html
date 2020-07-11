@@ -63,6 +63,23 @@
               >
                 Please enter a valid email address
               </mat-error>
+
+              <!-- check email exist  -->
+              <mat-error
+                *ngIf="
+                  sign_up_form.get('email').hasError('emailexist') &&
+                  !sign_up_form.get('email').hasError('email') &&
+                  !sign_up_form.get('email').hasError('required')
+                "
+              >
+                <strong>Email already exist</strong>
+              </mat-error>
+
+              <!-- checking availablity exist  -->
+              <!-- <mat-error *ngIf="sign_up_form.pending">
+                <strong> checking email availablity </strong>
+              </mat-error> -->
+
               <mat-error *ngIf="sign_up_form.get('email').hasError('required')">
                 Email is <strong>required</strong>
               </mat-error>
@@ -77,7 +94,7 @@
               <input
                 matInput
                 [type]="hide ? 'password' : 'text'"
-                formControlName="createpassword"
+                formControlName="password"
               />
               <button
                 mat-icon-button
@@ -92,7 +109,7 @@
               </button>
 
               <mat-error
-                *ngIf="sign_up_form.get('createpassword').hasError('required')"
+                *ngIf="sign_up_form.get('password').hasError('required')"
               >
                 Password is <strong>required</strong>
               </mat-error>
@@ -141,7 +158,7 @@
             mat-flat-button
             color="primary"
             type="submit"
-            [disabled]="sign_up_form.invalid"
+            [disabled]="!sign_up_form.valid"
           >
             register
           </button>

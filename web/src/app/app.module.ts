@@ -9,17 +9,24 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./navbar.component";
 import { LoginComponent } from "./components/auth/login.component";
-import { SignupComponent } from './components/auth/signup.component';
+import { SignupComponent } from "./components/auth/signup.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, LoginComponent, SignupComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    LoginComponent,
+    SignupComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularMaterialModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
