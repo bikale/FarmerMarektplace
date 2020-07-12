@@ -1,15 +1,24 @@
-import { NgModule } from "@angular/core";
+import { NgModule, Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { DashboardComponent } from "./components/dashboard.component";
 import { RouterModule } from "@angular/router";
 
-@NgModule({
-  declarations: [DashboardComponent],
+import { HomeDashboardComponent } from "./components/UI/home-dashboard/home-dashboard.component";
+import { AngularMaterialModule } from "../angular-material.module";
 
+@NgModule({
+  declarations: [DashboardComponent, HomeDashboardComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild([{ path: "", component: DashboardComponent }]),
+    RouterModule.forChild([
+      {
+        path: "",
+        component: DashboardComponent,
+        children: [{ path: "", component: HomeDashboardComponent }],
+      },
+    ]),
+    AngularMaterialModule,
   ],
-  exports: [DashboardComponent],
+  exports: [DashboardComponent, HomeDashboardComponent],
 })
 export class FarmerdashboardModule {}

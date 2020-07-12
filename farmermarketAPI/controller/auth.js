@@ -43,7 +43,6 @@ exports.signUp = async (req, res, next) => {
 
 exports.checkEmailExist = async (req, res, next) => {
   try {
-    console.log(req.params.email);
     const user = await User.findOne({ email: req.params.email });
 
     if (user) {
