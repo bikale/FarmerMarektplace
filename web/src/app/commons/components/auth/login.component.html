@@ -7,6 +7,11 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="2">
         <form [formGroup]="loginform" (ngSubmit)="onLogin()" class="login-form">
+          <p>
+            <mat-error *ngIf="error">
+              Please enter a valid email address and password
+            </mat-error>
+          </p>
           <p>Please enter your email and password</p>
 
           <p>
@@ -57,7 +62,18 @@
               </mat-error>
             </mat-form-field>
           </p>
-          <button mat-flat-button color="primary" type="submit">login</button>
+          <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="!loginform.valid"
+          >
+            login
+          </button>
+
+          <div style="padding-top: 70px;">
+            <a mat-button [routerLink]="['/signup']">Create an account</a>
+          </div>
         </form>
       </mat-grid-tile>
     </mat-grid-list>

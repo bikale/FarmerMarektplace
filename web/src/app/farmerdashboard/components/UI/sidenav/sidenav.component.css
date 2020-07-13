@@ -21,4 +21,10 @@
 }
 
 .sidenav-menu-list {
+  padding-left: 20px;
+}
+.sidenav-menu-list-link {
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 500;
 }

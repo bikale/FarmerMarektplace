@@ -1,7 +1,13 @@
 <body>
   <mat-drawer-container class="dashboard-container">
     <!-- sid nav -->
-    <mat-drawer #drawer mode="side" opened class="dashboard-drawer">
+    <mat-drawer
+      #drawer
+      mode="side"
+      opened
+      class="dashboard-drawer"
+      role="navigation"
+    >
       <mat-nav-list>
         <app-sidenav></app-sidenav>
       </mat-nav-list>
@@ -43,10 +49,15 @@
           <button
             mat-icon-button
             class="navbar-link"
-            aria-label="Example icon-button with share icon"
+            aria-label="Account activity"
+            [matMenuTriggerFor]="menu"
           >
             <mat-icon mat-card-avatar class="navbar-user-image"></mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onLogout()">Logout</button>
+            <button mat-menu-item>""</button>
+          </mat-menu>
         </mat-toolbar>
       </div>
       <!-- navbar -->

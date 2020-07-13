@@ -4,9 +4,9 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 // const dotenv = require("dotenv");
 
-const auth = require("./routes/auth");
-const customers = require("./routes/customers");
-const farmers = require("./routes/farmers");
+const auth = require("./routes/auth.route");
+const customers = require("./routes/customers.route");
+const farmers = require("./routes/farmers.route");
 
 const app = express();
 

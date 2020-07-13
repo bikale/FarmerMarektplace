@@ -8,6 +8,5 @@ import { Component, OnInit } from "@angular/core";
 export class SidenavComponent implements OnInit {
   constructor() {}
 
-  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
   ngOnInit(): void {}
 }

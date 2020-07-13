@@ -7,6 +7,11 @@
           (ngSubmit)="onsignUp()"
           class="register-form"
         >
+          <p>
+            <mat-error *ngIf="error">
+              Please enter a valid information
+            </mat-error>
+          </p>
           <table class="register-form-full-width" cellspacing="0">
             <tr>
               <td>
@@ -162,6 +167,11 @@
           >
             register
           </button>
+
+          <div style="padding-top: 70px;">
+            Already have an account ?
+            <a [routerLink]="['/login']">Login</a>
+          </div>
         </form>
       </mat-grid-tile>
 

@@ -22,7 +22,8 @@ export class AccessGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const currentUser = this.authService.currentUserValue;
+    const currentUser = this.authService.currentUserValue();
+
     if (currentUser) {
       // logged in so return true
       return true;

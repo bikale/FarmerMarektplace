@@ -1,13 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { LoginComponent } from "./components/auth/login.component";
-import { SignupComponent } from "./components/auth/signup.component";
-import { AccessGuard } from "./guards/access.guard";
+import { LoginComponent } from "./commons/components/auth/login.component";
+import { SignupComponent } from "./commons/components/auth/signup.component";
+import { AccessGuard } from "./commons/guards/access.guard";
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
-  { path: "signup", component: SignupComponent },
   {
     path: "",
     loadChildren: () =>
@@ -16,6 +14,8 @@ const routes: Routes = [
       ),
     canActivate: [AccessGuard],
   },
+  { path: "login", component: LoginComponent },
+  { path: "signup", component: SignupComponent },
   { path: "**", redirectTo: "login", pathMatch: "full" },
 ];
 

@@ -9,3 +9,8 @@ export class Registrationform {
   email: string;
   password: string;
 }
+
+export class LoginCredential {
+  email: string;
+  password: string;
+}

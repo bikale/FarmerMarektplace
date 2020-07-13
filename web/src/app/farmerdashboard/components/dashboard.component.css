@@ -3,10 +3,19 @@
   background-color: #f6f6f6;
   font-size: 14px;
   font-weight: 400;
-  font-family: "Nunito", "Segoe UI", arial;
+  font-family: monospace;
   color: #6c757d;
   min-height: 100vh;
 }
+
+@media (max-width: 1024px) {
+  .dashboard-drawer {
+    min-width: 25vw !important;
+    width: 25vw;
+    flex: 1;
+  }
+}
+
 .dashboard-drawer {
   min-width: 15vw;
   width: 15vw;
