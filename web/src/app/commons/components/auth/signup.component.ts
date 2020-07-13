@@ -8,40 +8,25 @@ import {
   EmailValidator,
   FormGroup,
 } from "@angular/forms";
-import {
-  Observable,
-  pipe,
-  Subject,
-  of,
-  from,
-  fromEvent,
-  observable,
-  timer,
-} from "rxjs";
-import {
-  debounceTime,
-  map,
-  distinctUntilChanged,
-  switchMap,
-  delay,
-  flatMap,
-} from "rxjs/operators";
-import { AccountService } from "src/app/services/account.service";
-import { HttpClient } from "@angular/common/http";
+import { of, timer } from "rxjs";
+import { debounceTime, map, flatMap, first } from "rxjs/operators";
+import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-signup",
   templateUrl: "./signup.component.html",
   styleUrls: ["./signup.component.css"],
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
   hide = true;
   sign_up_form;
-  private searchUpdated = new Subject();
+  error;
+  loading;
   constructor(
-    formbuilder: FormBuilder,
-    private accountService: AccountService,
-    private http: HttpClient
+    private formbuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
   ) {
     this.sign_up_form = formbuilder.group({
       firstname: ["", Validators.required],
@@ -58,14 +43,21 @@ export class SignupComponent implements OnInit {
   get email() {
     return this.sign_up_form.get("email");
   }
-  ngOnInit(): void {}
 
   onsignUp() {
-    this.accountService
+    this.authService
       .createAccount(this.sign_up_form.value)
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .pipe(first()) //pipe(first()) automatically unsubscribes from the observable after returning the first item
+      .subscribe(
+        (data) => {
+          this.router.navigate(["/"]);
+        },
+        (error) => {
+          console.log(error.error);
+          this.error = error;
+          this.loading = false;
+        }
+      );
   }
 
   confirmPasswordValidator = (
@@ -85,7 +77,7 @@ export class SignupComponent implements OnInit {
         ) {
           return of({ email: true });
         } else {
-          return this.accountService.checkEmail(emailcontrol.value).pipe(
+          return this.authService.checkEmail(emailcontrol.value).pipe(
             map((res: any) => {
               if (res.success == true) {
                 return null;
