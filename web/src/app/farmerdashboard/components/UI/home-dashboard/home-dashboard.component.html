@@ -9,22 +9,34 @@
         <mat-card-header>
           <mat-card-title>
             {{ card.title }}
-            <button
-              mat-icon-button
-              class="more-button"
-              [matMenuTriggerFor]="menu"
-              aria-label="Toggle menu"
-            >
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
+          <mat-icon class="new-orders-bg-img">{{ card.bg_icon_name }}</mat-icon>
+
+          <div *ngIf="card.title == 'New Orders'">
+            20 new orders
+            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+          </div>
+          <div *ngIf="card.title == 'Earnings'">
+            $100 total earnings
+            <mat-progress-bar mode="determinate" value="70"></mat-progress-bar>
+          </div>
+          <div *ngIf="card.title == 'Orders'">
+            200 orders so far
+          </div>
+          <div *ngIf="card.title == 'Orders List'">
+            <orders-table></orders-table>
+          </div>
+
+          <div *ngIf="card.title == 'Returns'">
+            2 Returns
+            <mat-progress-bar
+              mode="determinate"
+              value="10"
+              color="warn"
+            ></mat-progress-bar>
+          </div>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

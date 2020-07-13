@@ -13,24 +13,85 @@ export class HomeDashboardComponent {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: "New Orders", classname: "new-orders", cols: 4, rows: 1 }, //classname css reference
-          { title: "Card 2", classname: "total-earnings", cols: 4, rows: 1 },
-          { title: "Card 3", classname: "total-orders", cols: 4, rows: 1 },
-          { title: "Card 4", classname: "returns", cols: 4, rows: 1 },
-          { title: "Card 5", classname: "new-orders", cols: 4, rows: 1 },
-          { title: "Card 6", classname: "new-orders", cols: 4, rows: 1 },
-          { title: "Card 7", classname: "new-orders", cols: 4, rows: 1 },
+          // bg_icon_name mat icon names    //classname css reference
+          {
+            title: "New Orders",
+            classname: "new-orders",
+            bg_icon_name: "add_shopping_cart",
+            cols: 4,
+            rows: 1,
+          },
+          {
+            title: "Earnings",
+            classname: "total-earnings",
+            bg_icon_name: "monetization_on",
+            cols: 4,
+            rows: 1,
+          },
+          {
+            title: "Orders",
+            classname: "total-orders",
+            bg_icon_name: "local_shipping",
+            cols: 4,
+            rows: 1,
+          },
+          {
+            title: "Returns",
+            classname: "returns",
+            bg_icon_name: "backspace",
+            cols: 4,
+            rows: 1,
+          },
+          {
+            title: "Orders List",
+            classname: "",
+            bg_icon_name: "add_shopping_cart",
+            cols: 4,
+            rows: 3,
+          },
+          { title: "Profile", classname: "", cols: 4, rows: 1 },
+          { title: "Product Inventory", classname: "", cols: 4, rows: 2 },
         ];
       }
 
       return [
-        { title: "Card 1", classname: "new-orders", cols: 1, rows: 1 }, //classname css reference
-        { title: "Card 2", classname: "total-earnings", cols: 1, rows: 1 },
-        { title: "Card 3", classname: "total-orders", cols: 1, rows: 1 },
-        { title: "Card 4", classname: "returns", cols: 1, rows: 1 },
-        { title: "Card 5", classname: "", cols: 3, rows: 3 },
-        { title: "Card 6", classname: "", cols: 1, rows: 3 },
-        { title: "Card 7", classname: "", cols: 4, rows: 1 },
+        {
+          title: "New Orders",
+          classname: "new-orders",
+          bg_icon_name: "add_shopping_cart",
+          cols: 1,
+          rows: 1,
+        }, //classname css reference  // bg_icon_name mat icon names    //classname css reference
+        {
+          title: "Earnings",
+          classname: "total-earnings",
+          bg_icon_name: "monetization_on",
+          cols: 1,
+          rows: 1,
+        },
+        {
+          title: "Orders",
+          classname: "total-orders",
+          bg_icon_name: "local_shipping",
+          cols: 1,
+          rows: 1,
+        },
+        {
+          title: "Returns",
+          classname: "returns",
+          bg_icon_name: "backspace",
+          cols: 1,
+          rows: 1,
+        },
+        {
+          title: "Orders List",
+          classname: "",
+          bg_icon_name: "add_shopping_cart",
+          cols: 3,
+          rows: 3,
+        },
+        { title: "Profile", classname: "", cols: 1, rows: 3 },
+        { title: "Product Inventory", classname: "", cols: 4, rows: 2 },
       ];
     })
   );

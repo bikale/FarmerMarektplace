@@ -2,6 +2,10 @@
 
 /* toolbar */
 
+body {
+  font-family: monospace !important;
+}
+
 .toolbar-header {
   justify-content: space-between;
   position: fixed;

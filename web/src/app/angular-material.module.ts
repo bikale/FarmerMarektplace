@@ -13,6 +13,10 @@ import { MatInputModule } from "@angular/material/input";
 import { MatMenuModule } from "@angular/material/menu";
 import { LayoutModule } from "@angular/cdk/layout";
 import { MatBadgeModule } from "@angular/material/badge";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
 
 @NgModule({
   imports: [
@@ -29,6 +33,10 @@ import { MatBadgeModule } from "@angular/material/badge";
     MatMenuModule,
     LayoutModule,
     MatBadgeModule,
+    MatProgressBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   exports: [
     MatButtonModule,
@@ -43,6 +51,10 @@ import { MatBadgeModule } from "@angular/material/badge";
     MatMenuModule,
     LayoutModule,
     MatBadgeModule,
+    MatProgressBarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [],
 })

@@ -15,6 +15,12 @@
 
   border-radius: 10px;
   border: none;
+  overflow: hidden;
+  font-family: monospace;
+}
+
+mat-grid-tile {
+  overflow: inherit;
 }
 
 .more-button {
@@ -25,6 +31,9 @@
 
 .dashboard-card-content {
   text-align: center;
+  color: rgba(123, 54, 54, 0.87);
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .new-orders {
@@ -81,4 +90,19 @@
     #928dab,
     #00d2ff
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.new-orders-bg-img {
+  opacity: 0.1;
+  right: 65px;
+  font-size: 110px;
+  position: absolute;
+  text-align: center;
+  color: #000;
+  top: 20px;
+  margin-left: 15px;
+  height: 50px;
+}
+.mat-card-title {
+  font-size: 28px;
 }
