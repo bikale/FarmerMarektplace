@@ -17,7 +17,7 @@ export class HomeDashboardComponent {
           {
             title: "New Orders",
             classname: "new-orders",
-            bg_icon_name: "add_shopping_cart",
+            bg_icon_name: "local_shipping",
             cols: 4,
             rows: 1,
           },
@@ -31,7 +31,7 @@ export class HomeDashboardComponent {
           {
             title: "Orders",
             classname: "total-orders",
-            bg_icon_name: "local_shipping",
+            bg_icon_name: "account_balance",
             cols: 4,
             rows: 1,
           },
@@ -45,12 +45,24 @@ export class HomeDashboardComponent {
           {
             title: "Orders List",
             classname: "",
-            bg_icon_name: "add_shopping_cart",
+            bg_icon_name: "local_shipping",
             cols: 4,
             rows: 3,
           },
-          { title: "Profile", classname: "", cols: 4, rows: 1 },
-          { title: "Product Inventory", classname: "", cols: 4, rows: 2 },
+          {
+            title: "Profile",
+            classname: "",
+            bg_icon_name: "account_circle",
+            cols: 4,
+            rows: 1,
+          },
+          {
+            title: "Product Inventory",
+            classname: "",
+            bg_icon_name: "add_shopping_cart",
+            cols: 4,
+            rows: 2,
+          },
         ];
       }
 
@@ -58,7 +70,7 @@ export class HomeDashboardComponent {
         {
           title: "New Orders",
           classname: "new-orders",
-          bg_icon_name: "add_shopping_cart",
+          bg_icon_name: "local_shipping",
           cols: 1,
           rows: 1,
         }, //classname css reference  // bg_icon_name mat icon names    //classname css reference
@@ -72,7 +84,7 @@ export class HomeDashboardComponent {
         {
           title: "Orders",
           classname: "total-orders",
-          bg_icon_name: "local_shipping",
+          bg_icon_name: "account_balance",
           cols: 1,
           rows: 1,
         },
@@ -86,12 +98,24 @@ export class HomeDashboardComponent {
         {
           title: "Orders List",
           classname: "",
-          bg_icon_name: "add_shopping_cart",
+          bg_icon_name: "local_shipping",
           cols: 3,
           rows: 3,
         },
-        { title: "Profile", classname: "", cols: 1, rows: 3 },
-        { title: "Product Inventory", classname: "", cols: 4, rows: 2 },
+        {
+          title: "Profile",
+          classname: "",
+          bg_icon_name: "account_circle",
+          cols: 1,
+          rows: 3,
+        },
+        {
+          title: "Product Inventory",
+          classname: "",
+          bg_icon_name: "add_shopping_cart",
+          cols: 4,
+          rows: 2,
+        },
       ];
     })
   );

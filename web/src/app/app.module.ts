@@ -4,13 +4,14 @@ import { NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AngularMaterialModule } from "./angular-material.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 import { LoginComponent } from "./commons/components/auth/login.component";
 import { SignupComponent } from "./commons/components/auth/signup.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpRequestInterceptor } from "./commons/interceptors/http.interceptor";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, SignupComponent],
@@ -23,7 +24,13 @@ import { HttpClientModule } from "@angular/common/http";
     ReactiveFormsModule,
     AngularMaterialModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

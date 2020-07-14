@@ -120,6 +120,25 @@ exports.logout = async (req, res, next) => {
   });
 };
 
+// @desc      Get user profile
+// @route     GET /api/v1/farmermarket/auth/me
+// @access    Private
+
+exports.getMe = async (req, res, next) => {
+  try {
+    const profile = await User.findOne({ _id: req.user._id });
+    res.status(200).json({
+      success: true,
+      data: profile,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "something went wrong not able to send reset token",
+    });
+  }
+};
+
 // @desc      Forgot password
 // @route     POST /api/v1/farmermarket/auth/forgotpassword
 // @access    Public

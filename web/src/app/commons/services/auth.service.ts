@@ -76,4 +76,6 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
   //The logout() method removes the current user object from local storage and publishes null to the currentUserSubject to notify all subscribers that the user has logged out.
+
+  getProducts() {}
 }
