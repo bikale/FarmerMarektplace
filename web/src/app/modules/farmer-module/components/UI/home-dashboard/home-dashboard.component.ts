@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { map } from "rxjs/operators";
 import { Breakpoints, BreakpointObserver } from "@angular/cdk/layout";
 
@@ -7,7 +7,10 @@ import { Breakpoints, BreakpointObserver } from "@angular/cdk/layout";
   templateUrl: "./home-dashboard.component.html",
   styleUrls: ["./home-dashboard.component.css"],
 })
-export class HomeDashboardComponent {
+export class HomeDashboardComponent implements OnInit {
+  constructor(private breakpointObserver: BreakpointObserver) {}
+  ngOnInit() {}
+
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -114,11 +117,9 @@ export class HomeDashboardComponent {
           classname: "",
           bg_icon_name: "add_shopping_cart",
           cols: 4,
-          rows: 2,
+          rows: 3,
         },
       ];
     })
   );
-
-  constructor(private breakpointObserver: BreakpointObserver) {}
 }

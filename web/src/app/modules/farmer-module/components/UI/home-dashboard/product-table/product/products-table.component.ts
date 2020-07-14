@@ -1,22 +1,28 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-
-import { MatTableDataSource } from "@angular/material/table";
+import { Component, OnInit } from "@angular/core";
+import { PeriodicElement } from "src/app/common/_models/products";
 import { Sort } from "@angular/material/sort";
 
 @Component({
-  selector: "orders-table",
-  templateUrl: "./order-table.component.html",
-  styleUrls: ["./order-table.component.css"],
+  selector: "app-products-table",
+  templateUrl: "./products-table.component.html",
+  styleUrls: ["./products-table.component.css"],
 })
-export class OrderTableComponent implements OnInit {
-  displayedColumns: string[] = ["position", "name", "weight", "symbol"];
+export class ProductsTableComponent implements OnInit {
+  displayedColumns: string[] = [
+    "position",
+    "name",
+    "weight",
+    "symbol",
+    "addproduct",
+  ];
   dataSource = ELEMENT_DATA;
   sortedData: PeriodicElement[];
-  ngOnInit() {}
-
   constructor() {
     this.sortedData = this.dataSource.slice();
   }
+
+  ngOnInit(): void {}
+  addProduct() {}
 
   sortData(sort: Sort) {
     const data = this.dataSource.slice();
@@ -24,7 +30,7 @@ export class OrderTableComponent implements OnInit {
       this.sortedData = data;
       return;
     }
-    console.log("object");
+
     this.sortedData = data.sort((a, b) => {
       const isAsc = sort.direction === "asc";
       switch (sort.active) {
@@ -43,13 +49,6 @@ export class OrderTableComponent implements OnInit {
     });
   }
 }
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
   { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },

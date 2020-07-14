@@ -8,12 +8,22 @@ const Order = require("../model/orders");
 
 exports.addProduct = async (req, res) => {
   try {
-    let product = await Product.create(req.body);
-    await User.updateOne(
-      { _id: "5f03f8e2c3b2d99ffec3a81c" },
-      { $push: { "farmerInfo.products": product._id } }
-    );
-    res.status(200).json({ success: true, data: "created" });
+    let product = await Product.create({ ...req.body, farmer: req.user._id }); // store the product in the product collection
+    res
+      .status(200)
+      .json({ success: true, data: "Successfully product created" });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
+// @desc    Get all Products of the farmer
+// @route   Get /api/v1/farmermarket/farmers/products
+// @access  Private
+
+exports.getProducts = async (req, res) => {
+  try {
+    let products = await Product.find({ farmer: req.user._id });
+    res.status(200).json({ success: true, data: products });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }

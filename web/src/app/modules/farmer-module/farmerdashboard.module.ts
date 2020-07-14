@@ -4,9 +4,10 @@ import { DashboardComponent } from "./components/dashboard.component";
 import { RouterModule } from "@angular/router";
 
 import { HomeDashboardComponent } from "./components/UI/home-dashboard/home-dashboard.component";
-import { AngularMaterialModule } from "../../angular-material.module";
-import { OrderTableComponent } from "./components/UI/home-dashboard/product-table/order-table.component";
+import { AngularMaterialModule } from "../angular-material/angular-material.module";
+import { OrderTableComponent } from "./components/UI/home-dashboard/product-table/orders/order-table.component";
 import { SidenavComponent } from "./components/UI/sidenav/sidenav.component";
+import { ProductsTableComponent } from "./components/UI/home-dashboard/product-table/product/products-table.component";
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { SidenavComponent } from "./components/UI/sidenav/sidenav.component";
     HomeDashboardComponent,
     OrderTableComponent,
     SidenavComponent,
+    ProductsTableComponent,
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,12 @@ export class User {
   accessToken?: string;
 }
 
+export class UserProfile {
+  firstname: string;
+  lastname: string;
+  picture: string;
+}
+
 export class Registrationform {
   firstname: string;
   lastname: string;

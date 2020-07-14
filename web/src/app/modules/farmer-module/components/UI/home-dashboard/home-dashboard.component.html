@@ -25,10 +25,6 @@
           <div *ngIf="card.title == 'Orders'">
             200 orders so far
           </div>
-          <div *ngIf="card.title == 'Orders List'">
-            <orders-table></orders-table>
-          </div>
-
           <div *ngIf="card.title == 'Returns'">
             2 Returns
             <mat-progress-bar
@@ -37,6 +33,18 @@
               color="warn"
             ></mat-progress-bar>
           </div>
+
+          <!-- order list table card  -->
+          <div *ngIf="card.title == 'Orders List'">
+            <orders-table></orders-table>
+          </div>
+          <!-- order list table card  -->
+
+          <!-- order list table card  -->
+          <div *ngIf="card.title == 'Product Inventory'">
+            <app-products-table></app-products-table>
+          </div>
+          <!-- order list table card  -->
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>
