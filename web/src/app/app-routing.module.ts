@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { LoginComponent } from "./commons/components/auth/login.component";
-import { SignupComponent } from "./commons/components/auth/signup.component";
-import { AccessGuard } from "./commons/guards/access.guard";
+import { LoginComponent } from "./common/components/auth/login.component";
+import { SignupComponent } from "./common/components/auth/signup.component";
+import { AccessGuard } from "./common/guards/access.guard";
 
 const routes: Routes = [
   {
     path: "",
     loadChildren: () =>
-      import("./farmerdashboard/farmerdashboard.module").then(
+      import("./modules/farmer-module/farmerdashboard.module").then(
         (module) => module.FarmerdashboardModule
       ),
     canActivate: [AccessGuard],

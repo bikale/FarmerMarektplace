@@ -9,9 +9,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
-import { LoginComponent } from "./commons/components/auth/login.component";
-import { SignupComponent } from "./commons/components/auth/signup.component";
-import { HttpRequestInterceptor } from "./commons/interceptors/http.interceptor";
+import { LoginComponent } from "./common/components/auth/login.component";
+import { SignupComponent } from "./common/components/auth/signup.component";
+import { HttpRequestInterceptor } from "./common/interceptors/http.interceptor";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, SignupComponent],
