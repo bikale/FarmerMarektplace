@@ -1,28 +1,53 @@
 import { Component, OnInit } from "@angular/core";
-import { PeriodicElement } from "src/app/common/_models/products";
+import {
+  PeriodicElement,
+  Product,
+  ApiResponse,
+} from "src/app/common/_models/products";
 import { Sort } from "@angular/material/sort";
+import { MatDialog } from "@angular/material/dialog";
+import { AddProductDialogComponent } from "../add-product-dialog/add-product-dialog.component";
+import { FarmerService } from "src/app/common/services/farmer.service";
 
 @Component({
   selector: "app-products-table",
   templateUrl: "./products-table.component.html",
   styleUrls: ["./products-table.component.css"],
 })
-export class ProductsTableComponent implements OnInit {
+export class ProductsTableComponent {
   displayedColumns: string[] = [
-    "position",
+    "photo",
     "name",
-    "weight",
-    "symbol",
+    "price",
+    "quantity",
     "addproduct",
   ];
-  dataSource = ELEMENT_DATA;
-  sortedData: PeriodicElement[];
-  constructor() {
-    this.sortedData = this.dataSource.slice();
+  dataSource;
+  sortedData: Product[];
+  constructor(public dialog: MatDialog, private farmerService: FarmerService) {
+    // this.sortedData = this.dataSource.slice();
   }
 
-  ngOnInit(): void {}
-  addProduct() {}
+  ngOnInit(): void {
+    this.farmerService.getProducts().subscribe(
+      (res: ApiResponse) => {
+        this.dataSource = res.data;
+        this.sortedData = this.dataSource.slice(0, 5);
+        console.log(res);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  addProductDialog() {
+    const dialogRef = this.dialog.open(AddProductDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   sortData(sort: Sort) {
     const data = this.dataSource.slice();
@@ -34,14 +59,12 @@ export class ProductsTableComponent implements OnInit {
     this.sortedData = data.sort((a, b) => {
       const isAsc = sort.direction === "asc";
       switch (sort.active) {
-        case "position":
-          return compare(a.position, b.position, isAsc);
         case "name":
           return compare(a.name, b.name, isAsc);
-        case "weight":
-          return compare(a.weight, b.weight, isAsc);
-        case "symbol":
-          return compare(a.symbol, b.symbol, isAsc);
+        case "price":
+          return compare(a.price, b.price, isAsc);
+        case "quantity":
+          return compare(a.quantity, b.quantity, isAsc);
 
         default:
           return 0;
@@ -49,12 +72,12 @@ export class ProductsTableComponent implements OnInit {
     });
   }
 }
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
-  { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },
-  { position: 3, name: "Lithium", weight: 6.941, symbol: "Li" },
-  { position: 4, name: "Beryllium", weight: 9.0122, symbol: "Be" },
-  { position: 5, name: "Boron", weight: 10.811, symbol: "B" },
+const ELEMENT_DATA: Product[] = [
+  // { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
+  // { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },
+  // { position: 3, name: "Lithium", weight: 6.941, symbol: "Li" },
+  // { position: 4, name: "Beryllium", weight: 9.0122, symbol: "Be" },
+  // { position: 5, name: "Boron", weight: 10.811, symbol: "B" },
   // { position: 6, name: "Carbon", weight: 12.0107, symbol: "C" },
   // { position: 7, name: "Nitrogen", weight: 14.0067, symbol: "N" },
   // { position: 8, name: "Oxygen", weight: 15.9994, symbol: "O" },

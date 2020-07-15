@@ -58,7 +58,7 @@ export class AuthService {
       map((user) => {
         // store user details and jwt token in local storage
         localStorage.setItem("accesstoken", JSON.stringify(user["token"]));
-        this.currentUserSubject.next(user); //notify all subscribers that the user has logged in.
+        this.currentUserSubject.next(user["token"]); //notify all subscribers that the user has logged in.
         return user;
       }),
       catchError((err) => {

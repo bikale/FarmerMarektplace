@@ -1,17 +1,51 @@
 const User = require("../model/users.js");
 const Product = require("../model/products");
 const Order = require("../model/orders");
+const { Storage } = require("@google-cloud/storage");
+const path = require("path");
 
 // @desc    Create Product
 // @route   Post /api/v1/farmermarket/farmers/products
 // @access  Private
 
-exports.addProduct = async (req, res) => {
+exports.addProduct = async (req, res, next) => {
   try {
-    let product = await Product.create({ ...req.body, farmer: req.user._id }); // store the product in the product collection
-    res
-      .status(200)
-      .json({ success: true, data: "Successfully product created" });
+    const keyLocation = path.join(__dirname, "../config/gcpkey.json");
+    const storage = new Storage({
+      projectId: "farmermarket-283318",
+      keyFilename: keyLocation,
+    });
+
+    const bucket = storage.bucket("farmermarket");
+    const gcsname = Date.now() + req.file.originalname;
+    const file = bucket.file(gcsname);
+
+    const stream = file.createWriteStream({
+      metadata: {
+        contentType: req.file.mimetype,
+      },
+      resumable: false,
+      gzip: true,
+      public: true,
+    });
+
+    stream.end(req.file.buffer); // send the file and close the stream
+    const photoUrl = `https://storage.cloud.google.com/farmermarket/${gcsname}`;
+    stream.on("finish", async () => {
+      let product = await Product.create({
+        farmer: req.user._id,
+        ...req.body,
+        photo: photoUrl,
+      }); // store the product in the product collection
+      res.status(200).json({
+        success: true,
+        message: "Successfully product created",
+        data: product,
+      });
+    });
+    stream.on("error", (err) => {
+      res.status(400).json({ success: false, message: err });
+    });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
@@ -56,3 +90,29 @@ exports.updateOrder = async (req, res) => {
     res.status(400).json({ success: false, message: err.message });
   }
 };
+
+// const uploadPhotoToCloud=()=>{
+//   const keyLocation = path.join(__dirname, "./config/gcpkey.json");
+//     const storage = new Storage({
+//       projectId: "farmermarket-283318",
+//       keyFilename: keyLocation,
+//     });
+//     const bucket = storage.bucket("farmermarket");
+//     const gcsname = Date.now() + req.file.originalname;
+//     const file = bucket.file(gcsname);
+
+//     const stream = file.createWriteStream({
+//       metadata: {
+//         contentType: req.file.mimetype,
+//       },
+//       resumable: false,
+//       gzip: true,
+//       public: true,
+//     });
+//     // stream.write(req.file.buffer);
+//     // stream.end();
+//     stream.end(req.file.buffer); // send the file and close the stream
+//     stream.on("finish", () => {
+//       res.json({ success: true });
+//     });
+// }

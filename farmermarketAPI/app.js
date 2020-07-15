@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 // const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
 
 const auth = require("./routes/auth.route");
 const customers = require("./routes/customers.route");
@@ -11,9 +12,10 @@ const farmers = require("./routes/farmers.route");
 const app = express();
 
 //load env vars
-require("dotenv").config();
+require("dotenv").config({ path: "./config/.env" });
 
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //allow cors policy
 app.use(cors());

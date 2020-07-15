@@ -1,0 +1,14 @@
+.product-form-full-width {
+  width: 100%;
+}
+.add-product-dialog-container {
+  min-width: 35vw !important;
+  border-radius: 20px !important;
+}
+.mat-dialog-container {
+  border-radius: 20px;
+}
+
+.btn-addphoto {
+  margin-left: 450px;
+}

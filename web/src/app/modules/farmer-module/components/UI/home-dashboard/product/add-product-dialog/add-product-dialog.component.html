@@ -1,0 +1,104 @@
+<div class="add-product-dialog-container">
+  <h2 mat-dialog-title>Add Product</h2>
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="addProductForm">
+      <p>
+        <mat-form-field appearance="outline" class="product-form-full-width">
+          <mat-label>Name</mat-label>
+          <input
+            type="text"
+            matInput
+            placeholder="Ex. Avocado..."
+            formControlName="name"
+          />
+
+          <mat-hint>Add Product name</mat-hint>
+          <mat-error *ngIf="name.hasError('required')">
+            Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline" class="product-form-full-width">
+          <mat-label>Price</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Ex. $12"
+            formControlName="price"
+          />
+          <span matPrefix>$&nbsp;</span>
+          <span matSuffix>.00</span>
+          <mat-hint>Add Product price</mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline" class="product-form-full-width">
+          <mat-label>Quantity</mat-label>
+          <input
+            type="number"
+            matInput
+            placeholder="Ex. 20"
+            formControlName="quantity"
+          />
+
+          <mat-hint>Add Product quantity</mat-hint>
+        </mat-form-field>
+      </p>
+
+      <div class="product-form-full-width">
+        <mat-label>Photo </mat-label>
+        <!-- <label for="uploadPicture" class="upload-file">
+          <mat-icon>add_a_photo</mat-icon>
+        </label> -->
+
+        <input
+          type="file"
+          accept="image/*"
+          [hidden]="true"
+          #files
+          formControlName="photo"
+        />
+        <mat-hint *ngIf="!files.files[0]"> Add Product Photo </mat-hint>
+        <mat-hint *ngIf="files.files[0]">{{ files.files[0]["name"] }}</mat-hint>
+        <button class="btn-addphoto" mat-button (click)="files.click()">
+          <mat-icon>add_a_photo</mat-icon>
+        </button>
+
+        <mat-error
+          *ngIf="photo.hasError('invalid') && !photo.hasError('required')"
+        >
+          Please enter a valid Photo
+        </mat-error>
+        <!-- <mat-error *ngIf="photo.hasError('required')">
+          Photo is <strong>required</strong>
+        </mat-error> -->
+      </div>
+
+      <p>
+        <mat-form-field appearance="outline" class="product-form-full-width">
+          <mat-label>Description</mat-label>
+
+          <textarea
+            matInput
+            placeholder="Ex. It is..."
+            formControlName="description"
+          ></textarea>
+          <mat-hint>Add Product description</mat-hint>
+        </mat-form-field>
+      </p>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button
+      mat-button
+      color="primary"
+      [mat-dialog-close]="true"
+      (click)="onAddProduct(files)"
+      [disabled]="!addProductForm.valid"
+    >
+      Add Product
+    </button>
+  </mat-dialog-actions>
+</div>
