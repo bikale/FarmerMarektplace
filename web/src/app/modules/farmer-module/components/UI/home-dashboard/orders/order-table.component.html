@@ -5,32 +5,48 @@
     matSort
     (matSortChange)="sortData($event)"
   >
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="position">
-        No.
+    <!-- Customer Name Column -->
+    <ng-container matColumnDef="cust_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="cust_name">
+        Customer Name
       </th>
       <td mat-cell *matCellDef="let element">{{ element.position }}</td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="name">
-        Name
+    <!-- order_number Column -->
+    <ng-container matColumnDef="order_number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="order_number">
+        Order No
       </th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="weight">Weight</th>
+    <!-- status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
       <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="symbol">Symbol</th>
+    <!-- amount Column -->
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</th>
       <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+    </ng-container>
+
+    <!--add course button -->
+    <ng-container matColumnDef="detailaction">
+      <th mat-header-cell *matHeaderCellDef>
+        Details
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="openOrderDetailDialog(row)"
+        >
+          Detail
+        </button>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

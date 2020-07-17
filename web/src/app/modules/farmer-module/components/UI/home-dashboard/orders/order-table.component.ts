@@ -3,6 +3,8 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { Sort } from "@angular/material/sort";
 import { PeriodicElement } from "src/app/common/_models/products";
+import { DetailComponent } from "../../orders/order-detail/detail.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "orders-table",
@@ -10,12 +12,17 @@ import { PeriodicElement } from "src/app/common/_models/products";
   styleUrls: ["./order-table.component.css"],
 })
 export class OrderTableComponent implements OnInit {
-  displayedColumns: string[] = ["position", "name", "weight", "symbol"];
+  displayedColumns: string[] = [
+    "cust_name",
+    "order_number",
+    "status",
+    "amount",
+    "detailaction",
+  ];
   dataSource = ELEMENT_DATA;
   sortedData: PeriodicElement[];
   ngOnInit() {}
-
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.sortedData = this.dataSource.slice();
   }
 
@@ -29,18 +36,25 @@ export class OrderTableComponent implements OnInit {
     this.sortedData = data.sort((a, b) => {
       const isAsc = sort.direction === "asc";
       switch (sort.active) {
-        case "position":
+        case "cust_name":
           return compare(a.position, b.position, isAsc);
-        case "name":
+        case "order_number":
           return compare(a.name, b.name, isAsc);
-        case "weight":
+        case "status":
           return compare(a.weight, b.weight, isAsc);
-        case "symbol":
-          return compare(a.symbol, b.symbol, isAsc);
 
         default:
           return 0;
       }
+    });
+  }
+
+  openOrderDetailDialog(orderid) {
+    console.log(orderid);
+    this.dialog.open(DetailComponent, {
+      data: {
+        animal: "panda",
+      },
     });
   }
 }

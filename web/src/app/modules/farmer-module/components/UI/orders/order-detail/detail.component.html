@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Update Order Status</h1>
+<mat-dialog-content>
+  <mat-list role="list">
+    <mat-list-item role="listitem">{{ data.animal }}</mat-list-item>
+    <mat-list-item role="listitem">{{ data.animal }}</mat-list-item>
+    <mat-list-item role="listitem">{{ data.animal }}</mat-list-item>
+  </mat-list>
+
+  <h4>Basic mat-select</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite food</mat-label>
+    <mat-select (change)="hello($event.target.value)">
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{ food.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Update</button>
+</mat-dialog-actions>

@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+}
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+.example-table-container {
+  position: relative;
+  max-height: 400px;
+  overflow: auto;
+}

@@ -1,0 +1,30 @@
+.sidenav-container {
+}
+
+.sidenav-logo {
+  text-align: center;
+  padding-top: 50px;
+}
+
+.sidenav-user {
+  text-align: center;
+  padding: 10%;
+}
+.sidenav-user-img {
+  width: 100px;
+  margin-bottom: 12px;
+  border-radius: 20%;
+}
+.sidenav-user-detail-name {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.sidenav-menu-list {
+  padding-left: 20px;
+}
+.sidenav-menu-list-link {
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: 500;
+}

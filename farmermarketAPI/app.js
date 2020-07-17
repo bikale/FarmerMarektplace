@@ -1,4 +1,8 @@
+const path = require("path");
+const fs = require("fs");
 const express = require("express");
+
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -8,6 +12,7 @@ const bodyParser = require("body-parser");
 const auth = require("./routes/auth.route");
 const customers = require("./routes/customers.route");
 const farmers = require("./routes/farmers.route");
+const superuser = require("./routes/super-user.route");
 
 const app = express();
 
@@ -23,10 +28,18 @@ app.use(cors());
 // Cookie parser
 app.use(cookieParser());
 
+//Set morgan logger middleware
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
+app.use(morgan("combined", { stream: accessLogStream }));
+
 //Mount router
 app.use("/api/v1/farmermarket/auth", auth);
 app.use("/api/v1/farmermarket/farmers", farmers);
 app.use("/api/v1/farmermarket/customers", customers);
+app.use("/api/v1/farmermarket/super", superuser);
 
 //404 handler
 app.use((req, res, next) => {

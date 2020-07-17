@@ -31,8 +31,14 @@ export class AuthService {
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage
-          localStorage.setItem("accesstoken", JSON.stringify(user["token"]));
-          this.currentUserSubject.next(user["token"]); //notify all subscribers that the user has logged in.
+          localStorage.setItem(
+            "accesstoken",
+            JSON.stringify({ token: user["token"], role: user["role"] })
+          );
+          this.currentUserSubject.next({
+            token: user["token"],
+            role: user["role"],
+          }); //notify all subscribers that the user has logged in.
           return user;
         }),
         catchError((err) => {
@@ -57,8 +63,14 @@ export class AuthService {
     return this.http.post(`${this.authUrl}/login`, loginCredential).pipe(
       map((user) => {
         // store user details and jwt token in local storage
-        localStorage.setItem("accesstoken", JSON.stringify(user["token"]));
-        this.currentUserSubject.next(user["token"]); //notify all subscribers that the user has logged in.
+        localStorage.setItem(
+          "accesstoken",
+          JSON.stringify({ token: user["token"], role: user["role"] })
+        );
+        this.currentUserSubject.next({
+          token: user["token"],
+          role: user["role"],
+        }); //notify all subscribers that the user has logged in.
         return user;
       }),
       catchError((err) => {
@@ -73,7 +85,7 @@ export class AuthService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem("accesstoken");
-    this.currentUserSubject.next(null);
+    this.currentUserSubject.next({ token: null, role: null });
   }
   //The logout() method removes the current user object from local storage and publishes null to the currentUserSubject to notify all subscribers that the user has logged out.
 
