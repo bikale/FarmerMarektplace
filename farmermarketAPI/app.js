@@ -1,7 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 const express = require("express");
-
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -33,7 +32,11 @@ const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
   { flags: "a" }
 );
-app.use(morgan("combined", { stream: accessLogStream }));
+app.use(
+  morgan(":method :url :remote-addr :response-time :date[web]", {
+    stream: accessLogStream,
+  })
+);
 
 //Mount router
 app.use("/api/v1/farmermarket/auth", auth);

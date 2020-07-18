@@ -11,4 +11,8 @@ export class SuperUserService {
   getUserAccount() {
     return this.http.get(`${this.superUrl}/users`);
   }
+
+  changeUserStatus(id: string, status: boolean) {
+    return this.http.patch(`${this.superUrl}/users/${id}`, { status });
+  }
 }

@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginform;
   loading;
-  error;
+  error: any;
   constructor(
     formbuilder: FormBuilder,
     private authService: AuthService,

@@ -1,13 +1,43 @@
-<h2 mat-dialog-title>Install Angular</h2>
-<mat-dialog-content class="mat-typography">
-  <h3>Develop across all platforms</h3>
-  <p>
-    Learn one way to build applications with Angular and reuse your code and
-    abilities to build apps for any deployment target. For web, mobile web,
-    native mobile and native desktop.
-  </p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
-</mat-dialog-actions>
+<div class="edit-user-dialog-container">
+  <h2 mat-dialog-title>Edit User Status</h2>
+  <mat-dialog-content class="mat-typography">
+    <h3>User information</h3>
+
+    <form [formGroup]="changeStatusForm" ngNativeValidate>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Full name </mat-label>
+          <input matInput disabled value="{{ data.firstname }}" />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput disabled value="{{ data.email }}" />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Role</mat-label>
+          <input matInput disabled value="{{ data.role }}" />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-label>Status</mat-label>
+        <mat-slide-toggle formControlName="userStatus"></mat-slide-toggle>
+      </p>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="'close'">Cancel</button>
+    <button
+      mat-button
+      [mat-dialog-close]="this.changeStatusForm.get('userStatus').value"
+      color="primary"
+      (click)="onChangeStatus()"
+      cdkFocusInitial
+    >
+      Update
+    </button>
+  </mat-dialog-actions>
+</div>

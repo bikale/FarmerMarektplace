@@ -30,6 +30,7 @@ exports.addProduct = async (req, res, next) => {
     });
 
     stream.end(req.file.buffer); // send the file and close the stream
+
     const photoUrl = `https://storage.cloud.google.com/farmermarket/${gcsname}`;
     stream.on("finish", async () => {
       let product = await Product.create({
@@ -90,29 +91,3 @@ exports.updateOrder = async (req, res) => {
     res.status(400).json({ success: false, message: err.message });
   }
 };
-
-// const uploadPhotoToCloud=()=>{
-//   const keyLocation = path.join(__dirname, "./config/gcpkey.json");
-//     const storage = new Storage({
-//       projectId: "farmermarket-283318",
-//       keyFilename: keyLocation,
-//     });
-//     const bucket = storage.bucket("farmermarket");
-//     const gcsname = Date.now() + req.file.originalname;
-//     const file = bucket.file(gcsname);
-
-//     const stream = file.createWriteStream({
-//       metadata: {
-//         contentType: req.file.mimetype,
-//       },
-//       resumable: false,
-//       gzip: true,
-//       public: true,
-//     });
-//     // stream.write(req.file.buffer);
-//     // stream.end();
-//     stream.end(req.file.buffer); // send the file and close the stream
-//     stream.on("finish", () => {
-//       res.json({ success: true });
-//     });
-// }

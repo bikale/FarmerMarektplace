@@ -39,18 +39,31 @@ export class UsersListComponent implements OnInit {
           this.USERS_LIST_DATA
         );
         this.dataSource.paginator = this.paginator;
-        console.log(this.USERS_LIST_DATA);
+        // console.log(this.USERS_LIST_DATA);
       },
       (error) => {
         console.log(error);
       }
     );
   }
-  openUserEditDialog() {
-    const dialogRef = this.dialog.open(UserEditDialogComponent);
+  openUserEditDialog(userData) {
+    const dialogRef = this.dialog.open(UserEditDialogComponent, {
+      data: userData,
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      if (result != "close") {
+        this.USERS_LIST_DATA = this.USERS_LIST_DATA.map((item) => {
+          if (item["_id"] == userData._id) {
+            return { ...item, active: result };
+          }
+          return item;
+        });
+
+        this.dataSource = new MatTableDataSource<UsersList>(
+          this.USERS_LIST_DATA
+        );
+      }
     });
   }
 }

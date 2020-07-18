@@ -1,0 +1,12 @@
+mat-slide-toggle {
+  margin: 8px 0;
+  display: block;
+}
+.edit-user-dialog-container {
+  min-width: 25vw !important;
+  border-radius: 20px !important;
+}
+
+.form-full-width {
+  width: 100%;
+}

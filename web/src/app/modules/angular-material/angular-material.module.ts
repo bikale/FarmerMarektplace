@@ -20,6 +20,7 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatSelectModule } from "@angular/material/select";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { MatSelectModule } from "@angular/material/select";
     MatDialogModule,
     MatTooltipModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatButtonModule,
@@ -64,6 +66,7 @@ import { MatSelectModule } from "@angular/material/select";
     MatDialogModule,
     MatTooltipModule,
     MatSelectModule,
+    MatSlideToggleModule,
   ],
   providers: [],
 })
