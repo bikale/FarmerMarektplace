@@ -39,18 +39,25 @@ exports.changeStatus = async (req, res, next) => {
 
 exports.requestLog = async (req, res, next) => {
   try {
+    const requestLogs = [];
     const rl = readline.createInterface({
       input: fs.createReadStream(path.join(__dirname, "../access.log")),
       crlfDelay: Infinity,
     });
 
     rl.on("line", (line) => {
-      console.log(`Line from file: ${line}`);
+      let log = line.split(" ");
+      requestLogs.push({
+        method: log[0],
+        url: log[1],
+        response_time: log[3],
+        request_date: log.splice(4).join(" "),
+      });
     });
-    rl.on("end", function () {
+    rl.on("close", () => {
       res.status(200).json({
         success: true,
-        message: "okay",
+        data: requestLogs,
       });
     });
   } catch (err) {

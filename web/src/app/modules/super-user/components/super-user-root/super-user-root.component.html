@@ -13,6 +13,8 @@
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
           <super-users-list *ngIf="card.title == 'Users'"></super-users-list>
+          <super-request-log *ngIf="card.title == 'Requests Log'">
+          </super-request-log>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

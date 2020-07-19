@@ -15,4 +15,8 @@ export class SuperUserService {
   changeUserStatus(id: string, status: boolean) {
     return this.http.patch(`${this.superUrl}/users/${id}`, { status });
   }
+
+  getRequestLogs() {
+    return this.http.get(`${this.superUrl}/logs`);
+  }
 }

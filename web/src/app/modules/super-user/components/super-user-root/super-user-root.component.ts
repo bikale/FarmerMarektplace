@@ -20,19 +20,16 @@ export class SuperUserRootComponent implements OnInit {
           // bg_icon_name mat icon names    //classname css reference
           {
             title: "Users",
-
             cols: 4,
             rows: 3,
           },
           {
             title: "Transactions",
-
             cols: 4,
             rows: 2,
           },
           {
             title: "Requests Log",
-
             cols: 4,
             rows: 3,
           },
@@ -52,7 +49,6 @@ export class SuperUserRootComponent implements OnInit {
         },
         {
           title: "Requests Log",
-
           cols: 4,
           rows: 3,
         },

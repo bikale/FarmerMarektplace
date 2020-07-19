@@ -11,6 +11,6 @@ const {
 route.get("/users", protect, getUsers);
 route.patch("/users/:userid", protect, changeStatus);
 
-route.get("/logs", requestLog);
+route.get("/logs", protect, requestLog);
 
 module.exports = route;

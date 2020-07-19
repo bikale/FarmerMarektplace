@@ -33,7 +33,7 @@ const accessLogStream = fs.createWriteStream(
   { flags: "a" }
 );
 app.use(
-  morgan(":method :url :remote-addr :response-time :date[web]", {
+  morgan(":method :url  :response-time :date[web]", {
     stream: accessLogStream,
   })
 );
