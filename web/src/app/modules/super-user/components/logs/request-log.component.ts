@@ -5,6 +5,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { RequestLogs } from "src/app/common/_models/superUser";
 import { MatTableDataSource } from "@angular/material/table";
 import { ApiResponse } from "src/app/common/_models/products";
+import { MatSort } from "@angular/material/sort";
 
 @Component({
   selector: "super-request-log",
@@ -25,6 +26,8 @@ export class RequestLogComponent implements OnInit {
     public dialog: MatDialog
   ) {}
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   ngOnInit(): void {
     this.superService.getRequestLogs().subscribe(
       (res: ApiResponse) => {
@@ -32,10 +35,18 @@ export class RequestLogComponent implements OnInit {
         this.dataSource = new MatTableDataSource<RequestLogs>(this.REQUEST_LOG);
 
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

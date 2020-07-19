@@ -46,6 +46,11 @@ export class UsersListComponent implements OnInit {
       }
     );
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   openUserEditDialog(userData) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {
       data: userData,

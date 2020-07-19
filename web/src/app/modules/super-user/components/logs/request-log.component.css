@@ -7,8 +7,14 @@ table {
 th.mat-sort-header-sorted {
   color: black;
 }
-.userlist-table-container {
+.log-table-container {
   position: relative;
-  max-height: 400px;
+  max-height: 410px;
   overflow: auto;
+}
+
+.filter-form {
+  float: right;
+  text-align: right;
+  font-size: 14px;
 }
