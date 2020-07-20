@@ -5,6 +5,7 @@ import { Sort } from "@angular/material/sort";
 import { PeriodicElement } from "src/app/common/_models/products";
 import { DetailComponent } from "../../orders/order-detail/detail.component";
 import { MatDialog } from "@angular/material/dialog";
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
   selector: "orders-table",
@@ -20,20 +21,22 @@ export class OrderTableComponent implements OnInit {
     "detailaction",
   ];
   dataSource = ELEMENT_DATA;
-  sortedData: PeriodicElement[];
+  sortedData: MatTableDataSource<PeriodicElement>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   ngOnInit() {}
   constructor(public dialog: MatDialog) {
-    this.sortedData = this.dataSource.slice();
+    this.sortedData = new MatTableDataSource(this.dataSource);
   }
 
   sortData(sort: Sort) {
     const data = this.dataSource.slice();
     if (!sort.active || sort.direction === "") {
-      this.sortedData = data;
+      this.sortedData = new MatTableDataSource(data);
       return;
     }
 
-    this.sortedData = data.sort((a, b) => {
+    const sorteddata = data.sort((a, b) => {
       const isAsc = sort.direction === "asc";
       switch (sort.active) {
         case "cust_name":
@@ -47,6 +50,8 @@ export class OrderTableComponent implements OnInit {
           return 0;
       }
     });
+    this.sortedData = new MatTableDataSource(sorteddata);
+    this.sortedData.paginator = this.paginator;
   }
 
   openOrderDetailDialog(orderid) {
@@ -56,6 +61,14 @@ export class OrderTableComponent implements OnInit {
         animal: "panda",
       },
     });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    const filteredData = this.dataSource.filter((data) =>
+      data.name.toLowerCase().includes(filterValue.toLowerCase())
+    );
+    this.sortedData = new MatTableDataSource(filteredData);
+    this.sortedData.paginator = this.paginator;
   }
 }
 

@@ -31,9 +31,9 @@ mat-grid-tile {
 
 .dashboard-card-content {
   text-align: center;
-  color: rgba(123, 54, 54, 0.87);
+  color: whitesmoke;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .new-orders {

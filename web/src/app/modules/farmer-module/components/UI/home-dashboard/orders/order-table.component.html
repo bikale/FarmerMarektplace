@@ -1,4 +1,13 @@
-<div class="mat-elevation-z8">
+<div class="order-table-container">
+  <mat-form-field class="filter-form">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. Abebe Bikila"
+      #input
+    />
+  </mat-form-field>
   <table
     mat-table
     [dataSource]="sortedData"

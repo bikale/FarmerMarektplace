@@ -6,6 +6,7 @@ import { UsersList } from "../../../../common/_models/user";
 import { ApiResponse } from "src/app/common/_models/products";
 import { MatDialog } from "@angular/material/dialog";
 import { UserEditDialogComponent } from "./user-edit-dialog/user-edit-dialog.component";
+import { MatSort } from "@angular/material/sort";
 
 @Component({
   selector: "super-users-list",
@@ -30,6 +31,7 @@ export class UsersListComponent implements OnInit {
   ];
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   ngOnInit() {
     this.superService.getUserAccount().subscribe(
@@ -39,6 +41,8 @@ export class UsersListComponent implements OnInit {
           this.USERS_LIST_DATA
         );
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
         // console.log(this.USERS_LIST_DATA);
       },
       (error) => {
@@ -50,6 +54,9 @@ export class UsersListComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   openUserEditDialog(userData) {
     const dialogRef = this.dialog.open(UserEditDialogComponent, {
@@ -68,6 +75,9 @@ export class UsersListComponent implements OnInit {
         this.dataSource = new MatTableDataSource<UsersList>(
           this.USERS_LIST_DATA
         );
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
       }
     });
   }

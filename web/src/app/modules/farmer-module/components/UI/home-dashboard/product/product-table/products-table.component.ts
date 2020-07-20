@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   PeriodicElement,
   Product,
@@ -8,6 +8,8 @@ import { Sort } from "@angular/material/sort";
 import { MatDialog } from "@angular/material/dialog";
 import { AddProductDialogComponent } from "../add-product-dialog/add-product-dialog.component";
 import { FarmerService } from "src/app/common/services/farmer.service";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: "app-products-table",
@@ -23,17 +25,18 @@ export class ProductsTableComponent {
     "addproduct",
   ];
   dataSource;
-  sortedData: Product[];
+  sortedData: MatTableDataSource<Product>;
   constructor(public dialog: MatDialog, private farmerService: FarmerService) {
     // this.sortedData = this.dataSource.slice();
   }
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.farmerService.getProducts().subscribe(
       (res: ApiResponse) => {
         this.dataSource = res.data;
-        this.sortedData = this.dataSource.slice(0, 5);
-        console.log(res);
+        this.sortedData = new MatTableDataSource(this.dataSource);
+        this.sortedData.paginator = this.paginator;
       },
       (error) => {
         console.log(error);
@@ -43,7 +46,6 @@ export class ProductsTableComponent {
 
   addProductDialog() {
     const dialogRef = this.dialog.open(AddProductDialogComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
@@ -52,11 +54,11 @@ export class ProductsTableComponent {
   sortData(sort: Sort) {
     const data = this.dataSource.slice();
     if (!sort.active || sort.direction === "") {
-      this.sortedData = data;
+      this.sortedData = new MatTableDataSource(data);
       return;
     }
 
-    this.sortedData = data.sort((a, b) => {
+    const sorteddata = data.sort((a, b) => {
       const isAsc = sort.direction === "asc";
       switch (sort.active) {
         case "name":
@@ -70,6 +72,16 @@ export class ProductsTableComponent {
           return 0;
       }
     });
+    this.sortedData = new MatTableDataSource(sorteddata);
+    this.sortedData.paginator = this.paginator;
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    const filteredData = this.dataSource.filter((data) =>
+      data.name.toLowerCase().includes(filterValue.toLowerCase())
+    );
+    this.sortedData = new MatTableDataSource(filteredData);
+    this.sortedData.paginator = this.paginator;
   }
 }
 const ELEMENT_DATA: Product[] = [];
