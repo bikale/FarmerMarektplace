@@ -1,5 +1,5 @@
 farmermarketAPI/node_modules
-farmermarketAPI/.env
+farmermarketAPI/config
 farmermarketAPI/.vscode
 mobile/node_modules
 web/node_modules

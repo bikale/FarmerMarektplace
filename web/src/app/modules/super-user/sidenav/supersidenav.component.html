@@ -1,0 +1,33 @@
+<div class="sidenav-container">
+  <div class="sidenav-logo">
+    <h1>Farmer Market</h1>
+  </div>
+
+  <div class="sidenav-user">
+    <div>
+      <img
+        src="https://material.angular.io/assets/img/examples/shiba1.jpg"
+        alt=""
+        srcset=""
+        class="sidenav-user-img"
+      />
+    </div>
+
+    <div class="sidenav-user-detail">
+      <div class="sidenav-user-detail-name">
+        {{ profile?.firstname }} {{ profile?.lastname }}
+      </div>
+      <div class="sidenav-user-detail-role">Super user</div>
+    </div>
+  </div>
+
+  <mat-nav-list class="sidenav-menu-list">
+    <a mat-list-item routerLink="." class="sidenav-menu-list-link">
+      Users
+    </a>
+    <a mat-list-item [routerLink]="['/products']" class="sidenav-menu-list-link"
+      >Transactions</a
+    >
+    <a mat-list-item routerLink="." class="sidenav-menu-list-link">Logs</a>
+  </mat-nav-list>
+</div>

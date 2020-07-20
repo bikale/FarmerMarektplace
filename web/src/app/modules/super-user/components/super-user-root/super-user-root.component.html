@@ -1,0 +1,22 @@
+<div class="grid-container">
+  <mat-grid-list cols="4" rowHeight="175px">
+    <mat-grid-tile
+      *ngFor="let card of cards | async"
+      [colspan]="card.cols"
+      [rowspan]="card.rows"
+    >
+      <mat-card [ngClass]="['dashboard-card']">
+        <mat-card-header>
+          <mat-card-title>
+            {{ card.title }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <super-users-list *ngIf="card.title == 'Users'"></super-users-list>
+          <super-request-log *ngIf="card.title == 'Requests Log'">
+          </super-request-log>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

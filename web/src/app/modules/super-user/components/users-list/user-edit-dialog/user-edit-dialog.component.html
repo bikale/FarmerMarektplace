@@ -1,0 +1,43 @@
+<div class="edit-user-dialog-container">
+  <h2 mat-dialog-title>Edit User Status</h2>
+  <mat-dialog-content class="mat-typography">
+    <h3>User information</h3>
+
+    <form [formGroup]="changeStatusForm" ngNativeValidate>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Full name </mat-label>
+          <input matInput disabled value="{{ data.firstname }}" />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput disabled value="{{ data.email }}" />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <mat-label>Role</mat-label>
+          <input matInput disabled value="{{ data.role }}" />
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-label>Status</mat-label>
+        <mat-slide-toggle formControlName="userStatus"></mat-slide-toggle>
+      </p>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="'close'">Cancel</button>
+    <button
+      mat-button
+      [mat-dialog-close]="this.changeStatusForm.get('userStatus').value"
+      color="primary"
+      (click)="onChangeStatus()"
+      cdkFocusInitial
+    >
+      Update
+    </button>
+  </mat-dialog-actions>
+</div>

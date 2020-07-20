@@ -1,0 +1,20 @@
+table {
+  width: 100%;
+}
+.mat-elevation-z8 {
+  box-shadow: none;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+.log-table-container {
+  position: relative;
+  max-height: 410px;
+  overflow: auto;
+}
+
+.filter-form {
+  float: right;
+  text-align: right;
+  font-size: 14px;
+}

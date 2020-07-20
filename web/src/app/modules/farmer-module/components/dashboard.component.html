@@ -24,7 +24,11 @@
           >
             <mat-icon (click)="drawer.toggle()">menu</mat-icon>
           </button>
-          <span>Farmer Market</span>
+          <span>
+            <a mat-list-item [routerLink]="['/']" class="menu-tab-list">
+              Farmer Market
+            </a>
+          </span>
           <span class="navbar-spacer"></span>
           <button
             mat-icon-button

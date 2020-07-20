@@ -1,54 +1,77 @@
-import { Component, OnInit } from "@angular/core";
-import { PeriodicElement } from "src/app/common/_models/products";
+import { Component, OnInit, ViewChild } from "@angular/core";
+
+import { MatTableDataSource } from "@angular/material/table";
 import { Sort } from "@angular/material/sort";
+import { PeriodicElement } from "src/app/common/_models/products";
+import { DetailComponent } from "../../orders/order-detail/detail.component";
+import { MatDialog } from "@angular/material/dialog";
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
-  selector: "app-products-table",
-  templateUrl: "./products-table.component.html",
-  styleUrls: ["./products-table.component.css"],
+  selector: "orders-table",
+  templateUrl: "./order-table.component.html",
+  styleUrls: ["./order-table.component.css"],
 })
-export class ProductsTableComponent implements OnInit {
+export class OrderTableComponent implements OnInit {
   displayedColumns: string[] = [
-    "position",
-    "name",
-    "weight",
-    "symbol",
-    "addproduct",
+    "cust_name",
+    "order_number",
+    "status",
+    "amount",
+    "detailaction",
   ];
   dataSource = ELEMENT_DATA;
-  sortedData: PeriodicElement[];
-  constructor() {
-    this.sortedData = this.dataSource.slice();
-  }
+  sortedData: MatTableDataSource<PeriodicElement>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  ngOnInit(): void {}
-  addProduct() {}
+  ngOnInit() {}
+  constructor(public dialog: MatDialog) {
+    this.sortedData = new MatTableDataSource(this.dataSource);
+  }
 
   sortData(sort: Sort) {
     const data = this.dataSource.slice();
     if (!sort.active || sort.direction === "") {
-      this.sortedData = data;
+      this.sortedData = new MatTableDataSource(data);
       return;
     }
 
-    this.sortedData = data.sort((a, b) => {
+    const sorteddata = data.sort((a, b) => {
       const isAsc = sort.direction === "asc";
       switch (sort.active) {
-        case "position":
+        case "cust_name":
           return compare(a.position, b.position, isAsc);
-        case "name":
+        case "order_number":
           return compare(a.name, b.name, isAsc);
-        case "weight":
+        case "status":
           return compare(a.weight, b.weight, isAsc);
-        case "symbol":
-          return compare(a.symbol, b.symbol, isAsc);
 
         default:
           return 0;
       }
     });
+    this.sortedData = new MatTableDataSource(sorteddata);
+    this.sortedData.paginator = this.paginator;
+  }
+
+  openOrderDetailDialog(orderid) {
+    console.log(orderid);
+    this.dialog.open(DetailComponent, {
+      data: {
+        animal: "panda",
+      },
+    });
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    const filteredData = this.dataSource.filter((data) =>
+      data.name.toLowerCase().includes(filterValue.toLowerCase())
+    );
+    this.sortedData = new MatTableDataSource(filteredData);
+    this.sortedData.paginator = this.paginator;
   }
 }
+
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: "Hydrogen", weight: 1.0079, symbol: "H" },
   { position: 2, name: "Helium", weight: 4.0026, symbol: "He" },

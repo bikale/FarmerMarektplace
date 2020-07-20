@@ -243,5 +243,6 @@ const sendTokenResponse = (user, res, message) => {
     success: true,
     message,
     token,
+    role: user.role,
   });
 };

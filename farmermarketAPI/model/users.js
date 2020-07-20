@@ -53,5 +53,9 @@ const userSchema = new Schema({
     zipcode: String,
     country: String,
   },
+  active: {
+    type: Boolean,
+    default: true,
+  },
 });
 module.exports = mongoose.model("User", userSchema);

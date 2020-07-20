@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginform;
   loading;
-  error;
+  error: any;
   constructor(
     formbuilder: FormBuilder,
     private authService: AuthService,
@@ -37,7 +37,11 @@ export class LoginComponent implements OnInit {
       .pipe(first()) //pipe(first()) automatically unsubscribes from the observable after returning the first item
       .subscribe(
         (data) => {
-          this.router.navigate(["/"]);
+          if (data["role"] == "super") {
+            this.router.navigate(["super"]);
+          } else {
+            this.router.navigate(["/"]);
+          }
         },
         (error) => {
           console.log(error.error);

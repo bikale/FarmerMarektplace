@@ -1,0 +1,73 @@
+<body>
+  <mat-drawer-container class="dashboard-container">
+    <!-- sid nav -->
+    <mat-drawer
+      #drawer
+      mode="side"
+      opened
+      class="dashboard-drawer"
+      role="navigation"
+    >
+      <mat-nav-list>
+        <super-sidenav [profile]="userProfile"></super-sidenav>
+      </mat-nav-list>
+    </mat-drawer>
+    <!-- sid nav -->
+    <mat-drawer-content>
+      <!-- navbar -->
+      <div>
+        <mat-toolbar class="navbar">
+          <button
+            mat-icon-button
+            class="navbar-link"
+            aria-label="Example icon-button with menu icon"
+          >
+            <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+          </button>
+          <span>
+            <a mat-list-item [routerLink]="['/']" class="menu-tab-list">
+              Farmer Market
+            </a>
+          </span>
+          <span class="navbar-spacer"></span>
+          <button
+            mat-icon-button
+            class="navbar-link mail_outline"
+            aria-label="emails"
+            matBadge="3"
+            matBadgePosition="before"
+          >
+            <mat-icon>mail_outline</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="navbar-link notifications_none"
+            aria-label="orders notifications"
+            matBadge="8"
+            matBadgePosition="before"
+            matBadgeColor="warn"
+          >
+            <mat-icon>notifications_none</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            class="navbar-link"
+            aria-label="Account activity"
+            [matMenuTriggerFor]="menu"
+          >
+            <mat-icon mat-card-avatar class="navbar-user-image"></mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onLogout()">Logout</button>
+            <button mat-menu-item>""</button>
+          </mat-menu>
+        </mat-toolbar>
+      </div>
+      <!-- navbar -->
+
+      <router-outlet></router-outlet>
+      <!-- router-outlet -->
+    </mat-drawer-content>
+  </mat-drawer-container>
+</body>

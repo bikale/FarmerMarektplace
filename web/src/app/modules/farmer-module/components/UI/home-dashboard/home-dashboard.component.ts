@@ -64,7 +64,7 @@ export class HomeDashboardComponent implements OnInit {
             classname: "",
             bg_icon_name: "add_shopping_cart",
             cols: 4,
-            rows: 2,
+            rows: 3,
           },
         ];
       }

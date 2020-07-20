@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
     this.authService.getMe().subscribe(
       (res: any) => {
         this.userProfile = res.data;
-        console.log(this.userProfile);
       },
       (error) => {
         console.log(error.error);

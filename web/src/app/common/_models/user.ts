@@ -1,6 +1,6 @@
 export class User {
   role?: string;
-  accessToken?: string;
+  token?: string;
 }
 
 export class UserProfile {
@@ -19,4 +19,12 @@ export class Registrationform {
 export class LoginCredential {
   email: string;
   password: string;
+}
+
+export interface UsersList {
+  firstname: string;
+  lastname: string;
+  email: string;
+  role: string;
+  status: string;
 }

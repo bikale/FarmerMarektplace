@@ -21,11 +21,12 @@ body {
 mat-grid-tile {
   /* background: linear-gradient(#7e8e9e); */
 }
-.login-panel-right {
-  background-image: url(https://cdn.pixabay.com/photo/2014/08/24/06/04/fruit-426002_960_720.jpg);
+.login-panel-left {
+  background-image: url(https://www.jing.fm/clipimg/full/27-273214_medium-fruit-veg-box-illustration.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: whitesmoke;
 }
 
 .login-form {
