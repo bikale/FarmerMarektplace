@@ -9,7 +9,6 @@ const {
   checkEmailExist,
   getMe,
 } = require("../controller/auth");
-const { Router } = require("express");
 
 route.post("/users", signUp);
 route.post("/login", login);
