@@ -15,6 +15,10 @@ const superuser = require("./routes/super-user.route");
 
 const app = express();
 
+require("@google-cloud/debug-agent").start({
+  serviceContext: { enableCanary: true },
+});
+
 //load env vars
 require("dotenv").config({ path: "./config/.env" });
 
@@ -28,19 +32,20 @@ app.use(cors());
 app.use(cookieParser());
 
 app.get("/hi", (req, res) => {
+  console.log("in hi");
   return res.json({ status: "ok", data: [1, 2, 3, 4, 5] });
 });
 
-//Set morgan logger middleware
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
-app.use(
-  morgan(":method :url  :response-time :date[web]", {
-    stream: accessLogStream,
-  })
-);
+// //Set morgan logger middleware
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "./access.log"),
+//   { flags: "a" }
+// );
+// app.use(
+//   morgan(":method :url  :response-time :date[web]", {
+//     stream: accessLogStream,
+//   })
+// );
 
 //Mount router
 app.use("/api/v1/farmermarket/auth", auth);
