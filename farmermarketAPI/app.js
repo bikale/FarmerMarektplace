@@ -54,7 +54,9 @@ app.use((req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-const MongoURI = process.env.MongoURI || "";
+const MongoURI =
+  process.env.MongoURI ||
+  "mongodb+srv://fsgb:fsgb@cluster0-vzv7t.mongodb.net/farmermarket?retryWrites=true&w=majority";
 mongoose
   .connect(MongoURI, {
     useNewUrlParser: true,
