@@ -27,6 +27,10 @@ app.use(cors());
 // Cookie parser
 app.use(cookieParser());
 
+app.get("/hi", (req, res) => {
+  return res.json({ status: "ok", data: [1, 2, 3, 4, 5] });
+});
+
 //Set morgan logger middleware
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
