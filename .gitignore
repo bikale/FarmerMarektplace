@@ -1,8 +1,11 @@
 farmermarketAPI/node_modules
 farmermarketAPI/config
+farmermarketAPI/app.yaml
 farmermarketAPI/.vscode
 mobile/node_modules
+mobile/.vscode
 web/node_modules
+web/.vscode
 
 
 # OSX

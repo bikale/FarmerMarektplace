@@ -14,10 +14,10 @@ const farmers = require("./routes/farmers.route");
 const superuser = require("./routes/super-user.route");
 
 const app = express();
-app.set("trust proxy", true);
-require("@google-cloud/debug-agent").start({
-  serviceContext: { enableCanary: true },
-});
+// app.set("trust proxy", true);
+// require("@google-cloud/debug-agent").start({
+//   serviceContext: { enableCanary: true },
+// });
 
 //load env vars
 require("dotenv").config({ path: "./config/.env" });
@@ -31,7 +31,7 @@ app.use(cors());
 // Cookie parser
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
+app.get("/hi", (req, res) => {
   console.log("in hi");
   return res.json({ status: "ok", data: [1, 2, 3, 4, 5] });
 });
@@ -59,9 +59,7 @@ app.use((req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-const MongoURI =
-  process.env.MongoURI ||
-  "mongodb+srv://fsgb:fsgb@cluster0-vzv7t.mongodb.net/farmermarket?retryWrites=true&w=majority";
+const MongoURI = process.env.MongoURI || "";
 mongoose
   .connect(MongoURI, {
     useNewUrlParser: true,
