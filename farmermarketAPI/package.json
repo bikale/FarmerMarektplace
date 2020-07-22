@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app"
+    "start": "node app.js"
   },
   "author": "Bikale Aberra",
   "license": "MIT",

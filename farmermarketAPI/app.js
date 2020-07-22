@@ -14,7 +14,7 @@ const farmers = require("./routes/farmers.route");
 const superuser = require("./routes/super-user.route");
 
 const app = express();
-
+app.set("trust proxy", true);
 require("@google-cloud/debug-agent").start({
   serviceContext: { enableCanary: true },
 });
@@ -31,7 +31,7 @@ app.use(cors());
 // Cookie parser
 app.use(cookieParser());
 
-app.get("/hi", (req, res) => {
+app.get("/", (req, res) => {
   console.log("in hi");
   return res.json({ status: "ok", data: [1, 2, 3, 4, 5] });
 });
