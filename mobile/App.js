@@ -1,60 +1,30 @@
-import React, { useEffect } from "react";
-import { Button, View } from "react-native";
+import React from "react";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import axios from "axios";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import { AppLoading } from "expo";
+import ReduxThunk from "redux-thunk";
+import { Provider as PaperProvider } from "react-native-paper";
+import authReducer from "./src/store/reducers/auth";
+import MainNavigator from "./src/navigations/MainNavigator";
 
-const Stack = createStackNavigator();
-function HomeScreen({ navigation }) {
-  useEffect(() => {
-    console.log("hiiiiiii");
-    (async () => {
-      console.log("zeeeee");
-      try {
-        let res = await axios.get("http://localhost:5000/hi");
-        console.log(res);
-      } catch (error) {
-        console.log(error.message);
-      }
-    })();
-  }, []);
+// import farmersReducer from "./src/store/reducers/farmers";
+// import productsReducer from "./src/store/reducers/products";
+// import cartReducer from "./src/store/reducers/cart";
+// import orderReducer from "./src/store/reducers/order";
 
-  navigation.setOptions({ headerShown: false });
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Button
-        title="Go to Notifications"
-        onPress={() => navigation.navigate("Notifications")}
-      />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Button title="Go to Home" onPress={() => navigation.navigate("Home")} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Notifications" component={NotificationsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <PaperProvider>
+        <MainNavigator />
+      </PaperProvider>
+    </Provider>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
