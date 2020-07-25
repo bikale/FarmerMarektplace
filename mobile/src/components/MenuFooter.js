@@ -1,22 +1,31 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-
+import { TouchableOpacity } from "react-native-gesture-handler";
+import MatIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import FeatherIcon from "react-native-vector-icons/Feather";
+import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 const MenuFooter = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.menuContainer, styles.shadow]}>
-        <View>
-          <Text>menu 1</Text>
-        </View>
-        <View>
-          <Text>menu 1</Text>
-        </View>
-        <View>
-          <Text>menu 1</Text>
-        </View>
-        <View>
-          <Text>menu 1</Text>
-        </View>
+        <TouchableOpacity>
+          <MatIcon name="home-outline" size={40} />
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <FontAwesomeIcon name="user-o" size={31} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <FeatherIcon name="shopping-cart" size={31} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            console.log("hello");
+          }}
+        >
+          <MatIcon name="logout" size={30} />
+          <Text style={styles.logoutBtn}>logout</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -36,6 +45,7 @@ const styles = StyleSheet.create({
   menuContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
+    alignItems: "center",
     minHeight: 50,
     width: "100%",
     backgroundColor: "#f0f5f5",
@@ -47,5 +57,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 13,
     elevation: 2,
+  },
+  logoutBtn: {
+    fontSize: 12,
+    fontWeight: "600",
   },
 });

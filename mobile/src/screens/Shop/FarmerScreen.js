@@ -4,6 +4,7 @@ import { Avatar, Button, Card, IconButton } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import FarmerCard from "../../components/FarmerCard";
+import MenuFooter from "../../components/MenuFooter";
 
 export default function FarmerScreen({ navigation }) {
   const DATA = [
@@ -48,6 +49,7 @@ export default function FarmerScreen({ navigation }) {
         keyExtractor={(item) => item.id}
         extraData={DATA}
       />
+      <MenuFooter />
     </View>
   );
 }
