@@ -1,10 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+
 import MatIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+
+import { useNavigation } from "@react-navigation/native";
+import { Badge } from "react-native-paper";
+
 const MenuFooter = () => {
+  const { navigate } = useNavigation();
   return (
     <View style={styles.container}>
       <View style={[styles.menuContainer, styles.shadow]}>
@@ -15,8 +21,23 @@ const MenuFooter = () => {
         <TouchableOpacity>
           <FontAwesomeIcon name="user-o" size={31} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <FeatherIcon name="shopping-cart" size={31} color="black" />
+        <TouchableOpacity
+          onPress={() => {
+            navigate("CART");
+          }}
+        >
+          <View>
+            <Badge
+              style={{
+                zIndex: 1,
+                top: 12,
+                backgroundColor: "red",
+              }}
+            >
+              3
+            </Badge>
+            <FeatherIcon name="shopping-cart" size={33} color="black" />
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {

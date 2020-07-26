@@ -61,16 +61,16 @@ export default function ProductScreen() {
             <View style={styles.cardActions}>
               <Text style={styles.priceTag}>$25 </Text>
               <TouchableOpacity style={styles.button}>
-                <Icon name="information-outline" size={35} color="#0AC4BA" />
+                <Icon name="information-outline" size={35} color="#32CD32" />
               </TouchableOpacity>
               <TouchableOpacity style={styles.button}>
-                <Icon name="cart-plus" size={35} color="#0AC4BA" />
+                <Icon name="cart-plus" size={35} color="#32CD32" />
               </TouchableOpacity>
             </View>
             <Image
               source={{
                 uri:
-                  "https://www.clipartkey.com/mpngs/m/89-895368_corn-clipart-transparent-png-corn-on-the-cob.png",
+                  "https://storage.googleapis.com/farmermarket/1594789748454tomatoes-4238247_1920.jpg",
               }}
               style={styles.image}
             />
@@ -95,6 +95,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: "center",
     margin: 7,
+    bottom: 20,
+    marginTop: 25,
   },
   cardsContainer: {
     minHeight: 170,
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   headerContainer: {
-    top: 20,
+    top: 10,
     left: 20,
     zIndex: 1,
   },
@@ -142,6 +144,6 @@ const styles = StyleSheet.create({
   priceTag: {
     fontSize: 17,
     fontWeight: "bold",
-    color: "#0AC4BA",
+    color: "#32CD32",
   },
 });
