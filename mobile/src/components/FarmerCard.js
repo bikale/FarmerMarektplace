@@ -1,15 +1,17 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 
-const FarmerCard = (props) => {
+const FarmerCard = ({ farmerDetail: { firstname, lastname, farmerInfo } }) => {
   return (
     <View style={[styles.cardsContainer, styles.shadow]}>
       <View style={styles.farmerdetailContainer}>
-        <Text style={styles.farmernameText}>Mr Farmer</Text>
+        <Text style={styles.farmernameText}>
+          {firstname} {lastname}
+        </Text>
         <Text style={styles.numberofProducts}>
           200 <Text style={{ fontSize: 15 }}>products</Text>
         </Text>
-        <Text style={styles.farmerRate}>Rating: 2</Text>
+        <Text style={styles.farmerRate}>Rating: {farmerInfo.rating}</Text>
       </View>
       <>
         <Image
@@ -68,12 +70,12 @@ const styles = StyleSheet.create({
   },
   farmerRate: {
     fontSize: 12,
-    color: "grey",
+    color: "gold",
   },
   numberofProducts: {
     fontSize: 26,
     fontWeight: "800",
-    color: "#b2ffff",
+    color: "#32CD32",
     // fontFamily: "monospace",
   },
 });

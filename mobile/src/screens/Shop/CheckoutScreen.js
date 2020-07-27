@@ -10,40 +10,49 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Button from "../../components/Button";
+import OrderSuccess from "../../components/OrderSuccess";
 const CheckoutScreen = () => {
+  const token = null;
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity style={styles.headerContainer}>
-        <MaterialIcons name="arrow-back" size={25} color="black" />
-        <Text style={styles.headerbtnText}>Cart</Text>
-      </TouchableOpacity>
+      <OrderSuccess />
 
-      <View style={[styles.paymentCardContainer, styles.shadow]}>
-        <Image
-          source={require("../../assets/visacard.png")}
-          resizeMode="contain"
-          style={styles.image}
-        />
-      </View>
-
-      <View>
-        <View style={styles.orderDetail}>
-          <Text>total price</Text>
-          <Text>total price</Text>
-        </View>
-        <View style={styles.orderDetail}>
-          <Text>total price</Text>
-          <Text>total price</Text>
-        </View>
-        <View style={styles.orderDetail}>
-          <Text>total price</Text>
-          <Text>total price</Text>
-        </View>
-      </View>
-
-      <TouchableOpacity>
-        <Text>Place Order</Text>
-      </TouchableOpacity>
+      {token && (
+        <>
+          {" "}
+          <TouchableOpacity style={styles.headerContainer}>
+            <MaterialIcons name="arrow-back" size={25} color="black" />
+            <Text style={styles.headerbtnText}>Cart</Text>
+          </TouchableOpacity>
+          <View style={[styles.paymentCardContainer, styles.shadow]}>
+            <Image
+              source={require("../../assets/visacard.png")}
+              resizeMode="contain"
+              style={styles.image}
+            />
+          </View>
+          <View style={styles.orderDetailContainer}>
+            <View style={styles.orderDetail}>
+              <Text style={styles.detailText}>SubTotal</Text>
+              <Text style={styles.detailText}>$200</Text>
+            </View>
+            <View style={styles.orderDetail}>
+              <Text style={styles.detailText}>Quantity</Text>
+              <Text style={styles.detailText}>12</Text>
+            </View>
+            <View style={styles.orderDetail}>
+              <Text style={styles.detailText}>Farmer name</Text>
+              <Text style={styles.detailText}>Abebe bikila</Text>
+            </View>
+          </View>
+          <View style={styles.checkoutBtnContainer}>
+            <Button gradient>
+              <Text style={styles.checkoutBtnText}>Place Order</Text>
+            </Button>
+          </View>
+        </>
+      )}
     </SafeAreaView>
   );
 };
@@ -53,7 +62,6 @@ export default CheckoutScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
   },
   headerContainer: {
     flexDirection: "row",
@@ -66,8 +74,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   paymentCardContainer: {
+    flex: 1,
     height: 200,
     borderRadius: 10,
+    marginTop: 20,
   },
   shadow: {
     shadowColor: "#323643",
@@ -84,5 +94,26 @@ const styles = StyleSheet.create({
   orderDetail: {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  orderDetailContainer: {
+    flex: 1,
+
+    justifyContent: "center",
+    padding: 15,
+  },
+  checkoutBtnContainer: {
+    flex: 1,
+    marginLeft: 20,
+    marginRight: 20,
+    justifyContent: "center",
+  },
+  detailText: {
+    fontSize: 25,
+    fontWeight: "500",
+  },
+  checkoutBtnText: {
+    fontSize: 25,
+    textAlign: "center",
+    fontWeight: "600",
   },
 });

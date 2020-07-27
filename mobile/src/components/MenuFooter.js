@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+import { useDispatch, useSelector } from "react-redux";
+
 import MatIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
@@ -10,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Badge } from "react-native-paper";
 
 const MenuFooter = () => {
+  const { totalQuantity } = useSelector((state) => state.cart);
   const { navigate } = useNavigation();
   return (
     <View style={styles.container}>
@@ -34,7 +37,7 @@ const MenuFooter = () => {
                 backgroundColor: "red",
               }}
             >
-              3
+              {totalQuantity}
             </Badge>
             <FeatherIcon name="shopping-cart" size={33} color="black" />
           </View>

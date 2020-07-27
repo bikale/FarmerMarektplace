@@ -9,54 +9,24 @@ import {
   SafeAreaView,
 } from "react-native";
 
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, updateCart, removeItem } from "../../store/actions/cart";
+
 import MenuFooter from "../../components/MenuFooter";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 const CartScreen = ({ navigation: { navigate }, route: { params } }) => {
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
-    },
-    {
-      id: "bd7acbea-sc1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605s-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-s3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
-    },
-    {
-      id: "bd7acbea-sc1sb1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605ss-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-s3da1-4s71f-bd96-145571e29d72",
-      title: "Third Item",
-    },
-  ];
+  const dispatch = useDispatch();
+  const { items, totalQuantity, totalPrice } = useSelector(
+    (state) => state.cart
+  );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
         <View>
           <Text style={styles.headerText}>Cart</Text>
-          <Text style={styles.headerItemText}> 4 items</Text>
+          <Text style={styles.headerItemText}> {totalQuantity} items</Text>
         </View>
 
         <TouchableOpacity
@@ -65,23 +35,25 @@ const CartScreen = ({ navigation: { navigate }, route: { params } }) => {
           }}
           style={{ alignItems: "flex-end" }}
         >
-          <Text style={styles.headerText}>Checkout</Text>
+          <Text style={styles.headerText}>
+            CheckOut
+            <MaterialIcons name="arrow-forward" size={25} color="black" />
+          </Text>
           <Text style={styles.headerItemText}>
-            Total <Text style={styles.headerPriceText}> $200</Text>
+            Total <Text style={styles.headerPriceText}> $ {totalPrice}</Text>
           </Text>
         </TouchableOpacity>
       </View>
       <FlatList
         style={styles.flatListConatiner}
-        data={DATA}
-        renderItem={() => (
+        data={items}
+        renderItem={({ item }) => (
           <View style={[styles.cardsContainer, styles.shadow]}>
             <View style={styles.cardContaint}>
               <View style={styles.cardContaintImage}>
                 <Image
                   source={{
-                    uri:
-                      "https://storage.googleapis.com/farmermarket/1594789748454tomatoes-4238247_1920.jpg",
+                    uri: item.photo,
                   }}
                   style={styles.image}
                 />
@@ -89,34 +61,46 @@ const CartScreen = ({ navigation: { navigate }, route: { params } }) => {
 
               <View style={styles.cardContaintDetail}>
                 <View>
-                  <Text style={styles.productDetail}>
-                    description dddddddddddd
-                  </Text>
-                  <Text style={styles.productUnitPrice}>$0.05</Text>
+                  <Text style={styles.productDetail}>{item.name}</Text>
+                  <Text style={styles.productUnitPrice}>$ {item.price}</Text>
                 </View>
                 <View style={{ left: 30, top: 10 }}>
-                  <Text style={styles.productTotalPrice}>$75</Text>
+                  <Text style={styles.productTotalPrice}>
+                    $ {item.totalPrice}
+                  </Text>
                 </View>
               </View>
             </View>
 
             <View style={styles.cardActionContainer}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(updateCart(item, 1));
+                }}
+              >
                 <Text style={styles.cardActionBtnTxt}>+</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={styles.cardActionBtnTxt}>4</Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
+              <View>
+                <Text style={styles.cardActionBtnTxt}>{item.quantity}</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(updateCart(item, -1));
+                }}
+              >
                 <Text style={styles.cardActionBtnTxt}>-</Text>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(removeItem(item));
+                }}
+              >
                 <Icon name="delete" size={35} color="#A91B0D" />
               </TouchableOpacity>
             </View>
           </View>
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.name}
       />
 
       <MenuFooter />

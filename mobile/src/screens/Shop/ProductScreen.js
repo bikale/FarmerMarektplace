@@ -1,50 +1,27 @@
-import React from "react";
+import Axios from "axios";
+import React, { useEffect } from "react";
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { Menu } from "react-native-paper";
+
+import { useDispatch, useSelector } from "react-redux";
+import { selectedFarmer, getProducts } from "../../store/actions/shop";
+import { addToCart } from "../../store/actions/cart";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MenuFooter from "../../components/MenuFooter";
 
-export default function ProductScreen() {
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
-    },
-    {
-      id: "bd7acbea-sc1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605s-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-s3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
-    },
-    {
-      id: "bd7acbea-sc1sb1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605ss-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-s3da1-4s71f-bd96-145571e29d72",
-      title: "Third Item",
-    },
-  ];
+export default function ProductScreen({ navigation }) {
+  const xyz =
+    "https://storage.googleapis.com/farmermarket/1594789748454tomatoes-4238247_1920.jpg";
+  const dispatch = useDispatch();
+  const { farmerid, products } = useSelector((state) => state.shop);
+  useEffect(() => {
+    (async () => {
+      try {
+        await dispatch(getProducts(farmerid));
+      } catch (error) {}
+    })();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -55,28 +32,39 @@ export default function ProductScreen() {
       <FlatList
         contentContainerStyle={styles.flatListConatiner}
         numColumns={2}
-        data={DATA}
-        renderItem={() => (
+        data={products}
+        renderItem={({ item }) => (
           <View style={[styles.cardsContainer, styles.shadow]}>
             <View style={styles.cardActions}>
-              <Text style={styles.priceTag}>$25 </Text>
+              <Text style={styles.priceTag}>$ {item.price}</Text>
               <TouchableOpacity style={styles.button}>
                 <Icon name="information-outline" size={35} color="#32CD32" />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  dispatch(
+                    addToCart({
+                      name: item.name,
+                      price: item.price,
+                      photo: item.photo,
+                    })
+                  );
+                }}
+              >
                 <Icon name="cart-plus" size={35} color="#32CD32" />
               </TouchableOpacity>
             </View>
             <Image
               source={{
-                uri:
-                  "https://storage.googleapis.com/farmermarket/1594789748454tomatoes-4238247_1920.jpg",
+                uri: item.photo,
               }}
               style={styles.image}
             />
           </View>
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
+        extraData={products}
       />
 
       <MenuFooter />
