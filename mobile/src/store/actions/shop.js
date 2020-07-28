@@ -28,10 +28,11 @@ export const getFarmers = () => {
 };
 
 //action for selected farmer id
-export const selectedFarmer = (farmerid) => {
+export const selectedFarmer = (farmerid, farmername) => {
   return {
     type: SELECTEDFARMER,
     farmerid: farmerid,
+    farmername: farmername,
   };
 };
 

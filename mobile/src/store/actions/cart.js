@@ -3,6 +3,7 @@ import {
   ADDTOCART,
   REMOVECARTITEM,
   UPDATECART,
+  REMOVECART,
 } from "../actionTypes/actionTypes";
 
 //action for addToCart
@@ -27,5 +28,12 @@ export const removeItem = (product) => {
   return {
     type: REMOVECARTITEM,
     product: product,
+  };
+};
+
+//action for to empty the cart
+export const deleteCart = (product) => {
+  return {
+    type: REMOVECART,
   };
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,21 +7,33 @@ import {
   SafeAreaView,
   Image,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+
+import { placeOrder } from "../../store/actions/order";
+
+import { useDispatch, useSelector } from "react-redux";
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Button from "../../components/Button";
 import OrderSuccess from "../../components/OrderSuccess";
-const CheckoutScreen = () => {
-  const token = null;
+
+const CheckoutScreen = ({ navigation: { navigate } }) => {
+  const dispatch = useDispatch();
+  const {
+    cart: { items, totalQuantity, totalPrice },
+    shop: { farmername, farmerid },
+  } = useSelector((state) => state);
+
+  const [orderplaced, setstate] = useState(false);
   return (
     <SafeAreaView style={styles.container}>
-      <OrderSuccess />
-
-      {token && (
+      {!orderplaced && (
         <>
-          {" "}
-          <TouchableOpacity style={styles.headerContainer}>
+          <TouchableOpacity
+            style={styles.headerContainer}
+            onPress={() => {
+              navigate("CART");
+            }}
+          >
             <MaterialIcons name="arrow-back" size={25} color="black" />
             <Text style={styles.headerbtnText}>Cart</Text>
           </TouchableOpacity>
@@ -35,23 +47,38 @@ const CheckoutScreen = () => {
           <View style={styles.orderDetailContainer}>
             <View style={styles.orderDetail}>
               <Text style={styles.detailText}>SubTotal</Text>
-              <Text style={styles.detailText}>$200</Text>
+              <Text style={styles.detailTextRight}>$ {totalPrice}</Text>
             </View>
             <View style={styles.orderDetail}>
               <Text style={styles.detailText}>Quantity</Text>
-              <Text style={styles.detailText}>12</Text>
+              <Text style={styles.detailTextRight}>{totalQuantity}</Text>
             </View>
             <View style={styles.orderDetail}>
               <Text style={styles.detailText}>Farmer name</Text>
-              <Text style={styles.detailText}>Abebe bikila</Text>
+              <Text style={styles.detailTextRight}>{farmername}</Text>
             </View>
           </View>
           <View style={styles.checkoutBtnContainer}>
-            <Button gradient>
+            <Button
+              gradient
+              onPress={async () => {
+                await dispatch(
+                  placeOrder(items, farmerid, totalQuantity, totalPrice)
+                );
+                setstate(true);
+              }}
+            >
               <Text style={styles.checkoutBtnText}>Place Order</Text>
             </Button>
           </View>
         </>
+      )}
+      {orderplaced && (
+        <OrderSuccess
+          changeState={() => {
+            setstate(false);
+          }}
+        />
       )}
     </SafeAreaView>
   );
@@ -109,7 +136,13 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 25,
-    fontWeight: "500",
+    fontWeight: "400",
+    color: "#32CD32",
+  },
+  detailTextRight: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#32CD32",
   },
   checkoutBtnText: {
     fontSize: 25,

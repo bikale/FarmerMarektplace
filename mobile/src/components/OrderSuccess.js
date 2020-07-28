@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Button from "./Button";
 import { useNavigation } from "@react-navigation/native";
-const OrderSuccess = () => {
+const OrderSuccess = (props) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -26,6 +26,7 @@ const OrderSuccess = () => {
         <Button
           gradient
           onPress={() => {
+            props.changeState();
             navigation.navigate("FARMERS");
           }}
         >

@@ -15,15 +15,32 @@ import { addToCart, updateCart, removeItem } from "../../store/actions/cart";
 import MenuFooter from "../../components/MenuFooter";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
 const CartScreen = ({ navigation: { navigate }, route: { params } }) => {
   const dispatch = useDispatch();
   const { items, totalQuantity, totalPrice } = useSelector(
     (state) => state.cart
   );
-
+  const { farmerid } = useSelector((state) => state.shop);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            {
+              farmerid
+                ? navigate("SHOP", { screen: "PRODUCT" })
+                : navigate("SHOP");
+            }
+          }}
+          style={{ alignItems: "flex-end" }}
+        >
+          <Text style={styles.headerText}>
+            <MaterialIcons name="arrow-back" size={20} color="black" />
+            Products
+          </Text>
+        </TouchableOpacity>
+
         <View>
           <Text style={styles.headerText}>Cart</Text>
           <Text style={styles.headerItemText}> {totalQuantity} items</Text>
@@ -31,13 +48,15 @@ const CartScreen = ({ navigation: { navigate }, route: { params } }) => {
 
         <TouchableOpacity
           onPress={() => {
-            navigate("CHECKOUT");
+            {
+              items.length > 0 && navigate("CHECKOUT");
+            }
           }}
           style={{ alignItems: "flex-end" }}
         >
           <Text style={styles.headerText}>
             CheckOut
-            <MaterialIcons name="arrow-forward" size={25} color="black" />
+            <MaterialIcons name="arrow-forward" size={20} color="black" />
           </Text>
           <Text style={styles.headerItemText}>
             Total <Text style={styles.headerPriceText}> $ {totalPrice}</Text>
@@ -178,7 +197,7 @@ const styles = StyleSheet.create({
   },
 
   headerText: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
   },
   headerItemText: {

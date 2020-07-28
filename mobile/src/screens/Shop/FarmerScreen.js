@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, Alert } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import FarmerCard from "../../components/FarmerCard";
 import MenuFooter from "../../components/MenuFooter";
 import { useDispatch, useSelector } from "react-redux";
 import { getFarmers, selectedFarmer } from "../../store/actions/shop";
+import { removeItem, deleteCart } from "../../store/actions/cart";
 
 export default function FarmerScreen({ navigation }) {
   const dispatch = useDispatch();
-  const { farmers } = useSelector((state) => state.shop);
+  const { farmers, farmerid } = useSelector((state) => state.shop);
 
   useEffect(() => {
     (async () => {
@@ -17,6 +18,35 @@ export default function FarmerScreen({ navigation }) {
       } catch (error) {}
     })();
   }, []);
+
+  const oneFarmerPolicy = (newSelectedfarmer, farmername) => {
+    if (farmerid == null) return true;
+
+    if (newSelectedfarmer != farmerid) {
+      Alert.alert(
+        "Select Customer",
+        "Are you sure you wanna change the farmer",
+        [
+          {
+            text: "Yes",
+            onPress: () => {
+              dispatch(selectedFarmer(newSelectedfarmer, farmername));
+              dispatch(deleteCart());
+              navigation.navigate("PRODUCTS");
+            },
+          },
+          {
+            text: "No",
+            onPress: () => navigation.navigate("PRODUCTS"),
+            style: "cancel",
+          },
+        ],
+        { cancelable: false }
+      );
+    } else {
+      return true;
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -28,8 +58,14 @@ export default function FarmerScreen({ navigation }) {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => {
-              dispatch(selectedFarmer(item._id));
-              navigation.navigate("PRODUCTS");
+              if (
+                oneFarmerPolicy(item._id, `${item.firstname} ${item.lastname}`)
+              ) {
+                dispatch(
+                  selectedFarmer(item._id, `${item.firstname} ${item.lastname}`)
+                );
+                navigation.navigate("PRODUCTS");
+              }
             }}
           >
             <FarmerCard farmerDetail={item} />

@@ -3,6 +3,7 @@ import {
   ADDTOCART,
   REMOVECARTITEM,
   UPDATECART,
+  REMOVECART,
 } from "../actionTypes/actionTypes";
 //[{ name ,price,photo,quantity,totalItemPrice }]
 const initialState = { items: [], totalQuantity: 0, totalPrice: 0 };
@@ -27,6 +28,11 @@ const reducer = (state = initialState, action) => {
         items: state.items.filter((item) => item.name != action.product.name),
         totalQuantity: state.totalQuantity - action.product.quantity,
         totalPrice: state.totalPrice - action.product.totalItemPrice,
+      };
+    case REMOVECART:
+      return {
+        ...state,
+        ...initialState,
       };
     default:
       return state;

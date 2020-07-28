@@ -74,16 +74,23 @@ exports.getUserCart = async (req, res, next) => {
 // @access    Private
 
 exports.placeOrder = async (req, res, next) => {
+  const { farmerid, carts, totalQuantity, totalPrice } = req.body;
   try {
-    // const order = await Order.create({
-    //   customer: "5f0417ceaec98ec6367e5f2c",
-    //   farmer: "5f03f8e2c3b2d99ffec3a81c",
-    //   products: ["product1", "product2"],
-    // });
+    const order = await Order.create({
+      customer: req.user._id,
+      farmer: farmerid,
+      products: {
+        items: carts,
+        quantity: totalQuantity,
+        totalprice: totalPrice,
+      },
+    });
 
-    sendmail();
+    const { email } = await User.findOne({ _id: farmerid }); // get the farmer remail
 
-    res.status(200).json({ success: true, data: "order created" });
+    await sendmail(req.user.email, email, order._id);
+
+    res.status(200).json({ success: true, data: "order succesfully placed" });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

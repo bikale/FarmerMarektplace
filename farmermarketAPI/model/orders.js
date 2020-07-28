@@ -13,7 +13,7 @@ const orderSchema = new Schema({
     ref: "User",
   },
   // products: { item: [{quantity:Number,price:Number}], },
-  products: [String],
+  products: { items: [], quantity: Number, totalprice: Number },
   payment: Object,
   shipping: Object,
   orderedAt: {
