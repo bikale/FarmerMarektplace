@@ -31,7 +31,7 @@ exports.addProduct = async (req, res, next) => {
 
     stream.end(req.file.buffer); // send the file and close the stream
 
-    const photoUrl = `https://storage.cloud.google.com/farmermarket/${gcsname}`;
+    const photoUrl = `https://storage.googleapis.com/farmermarket/${gcsname}`;
     stream.on("finish", async () => {
       let product = await Product.create({
         farmer: req.user._id,

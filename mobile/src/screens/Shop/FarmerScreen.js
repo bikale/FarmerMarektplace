@@ -1,53 +1,80 @@
-import React from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
-import { Avatar, Button, Card, IconButton } from "react-native-paper";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useEffect } from "react";
+import { Text, StyleSheet, View, Image, Alert } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import FarmerCard from "../../components/FarmerCard";
+import MenuFooter from "../../components/MenuFooter";
+import { useDispatch, useSelector } from "react-redux";
+import { getFarmers, selectedFarmer } from "../../store/actions/shop";
+import { removeItem, deleteCart } from "../../store/actions/cart";
 
 export default function FarmerScreen({ navigation }) {
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Third Item",
-    },
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28bsa",
-      title: "First Item",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97fs63",
-      title: "Second Item",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-14557s1e29d72",
-      title: "Third Item",
-    },
-  ];
+  const dispatch = useDispatch();
+  const { farmers, farmerid } = useSelector((state) => state.shop);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await dispatch(getFarmers());
+      } catch (error) {}
+    })();
+  }, []);
+
+  const oneFarmerPolicy = (newSelectedfarmer, farmername) => {
+    if (farmerid == null) return true;
+
+    if (newSelectedfarmer != farmerid) {
+      Alert.alert(
+        "Select Customer",
+        "Are you sure you wanna change the farmer",
+        [
+          {
+            text: "Yes",
+            onPress: () => {
+              dispatch(selectedFarmer(newSelectedfarmer, farmername));
+              dispatch(deleteCart());
+              navigation.navigate("PRODUCTS");
+            },
+          },
+          {
+            text: "No",
+            onPress: () => navigation.navigate("PRODUCTS"),
+            style: "cancel",
+          },
+        ],
+        { cancelable: false }
+      );
+    } else {
+      return true;
+    }
+  };
+
   return (
     <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>Choose Farmer</Text>
+      </View>
       <FlatList
-        data={DATA}
+        data={farmers}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("PRODUCTS");
+              if (
+                oneFarmerPolicy(item._id, `${item.firstname} ${item.lastname}`)
+              ) {
+                dispatch(
+                  selectedFarmer(item._id, `${item.firstname} ${item.lastname}`)
+                );
+                navigation.navigate("PRODUCTS");
+              }
             }}
           >
-            <FarmerCard />
+            <FarmerCard farmerDetail={item} />
           </TouchableOpacity>
         )}
-        keyExtractor={(item) => item.id}
-        extraData={DATA}
+        keyExtractor={(item) => item._id}
+        extraData={farmers}
       />
+      <MenuFooter />
     </View>
   );
 }
@@ -56,5 +83,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 40,
+  },
+  headerContainer: {},
+  headerText: {
+    fontSize: 20,
+    color: "grey",
+    fontWeight: "600",
+    textAlign: "center",
   },
 });
