@@ -6,6 +6,7 @@ import MenuFooter from "../../components/MenuFooter";
 import { useDispatch, useSelector } from "react-redux";
 import { getFarmers, selectedFarmer } from "../../store/actions/shop";
 import { removeItem, deleteCart } from "../../store/actions/cart";
+import RatingModal from "../../components/RatingModal";
 
 export default function FarmerScreen({ navigation }) {
   const dispatch = useDispatch();

@@ -59,6 +59,7 @@ function mapTheOrderForSectionList(data) {
       data: order.products.items,
       title: order._id,
       status: order.status,
+      farmerid: order.farmer,
     };
   });
   return mappedList;

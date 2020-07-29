@@ -38,13 +38,7 @@ const userSchema = new Schema({
   },
   farmerInfo: {
     rating: { type: Number, default: 1 },
-    products: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
-      },
-    ],
+    comments: [String],
   },
   address: {
     street: String,

@@ -8,6 +8,7 @@ const {
   orderHistory,
   getFarmers,
   getFarmerProduct,
+  giveFeedback,
 } = require("../controller/customers");
 
 route.get("/farmers", protect, authorize("customer"), getFarmers);
@@ -18,5 +19,12 @@ route.get("/carts", protect, authorize("customer"), getUserCart);
 
 route.post("/orders", protect, authorize("customer"), placeOrder);
 route.get("/orders", protect, authorize("customer"), orderHistory);
+
+route.patch(
+  "/feedbacks/:farmerid",
+  protect,
+  authorize("customer"),
+  giveFeedback
+);
 
 module.exports = route;

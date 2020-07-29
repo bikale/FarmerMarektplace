@@ -13,7 +13,7 @@ axios.interceptors.request.use(
     return request;
   },
   (error) => {
-    console.warn(error);
+    console.warn(error.message);
     return Promise.reject(error);
   }
 );

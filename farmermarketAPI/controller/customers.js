@@ -9,7 +9,10 @@ const { sendmail } = require("../utils/sendMail");
 
 exports.getFarmers = async (req, res, next) => {
   try {
-    let farmers = await User.find({ role: "farmer" });
+    let farmers = await User.find(
+      { role: "farmer" },
+      { firstname: 1, lastname: 1, farmerInfo: 1 } // projecting  the necessary fields
+    );
 
     res.status(200).json({ success: true, data: farmers });
   } catch (err) {
@@ -102,8 +105,33 @@ exports.placeOrder = async (req, res, next) => {
 
 exports.orderHistory = async (req, res, next) => {
   try {
-    const orders = await Order.find({ customer: "5f0417ceaec98ec6367e5f2c" });
+    const orders = await Order.find({ customer: req.user._id });
     res.status(200).json({ success: true, data: orders });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// @desc      Rate farmer and give feedback
+// @route     Patch /api/v1/farmermarket/customers/feedbacks
+// @access    Private
+
+exports.giveFeedback = async (req, res, next) => {
+  try {
+    const { farmerid } = req.params;
+    const { comment, rate } = req.body;
+
+    await User.updateOne(
+      { _id: farmerid },
+      {
+        $inc: { "farmerInfo.rating": rate },
+        $push: { "farmerInfo.comments": comment },
+      }
+    );
+
+    res
+      .status(200)
+      .json({ success: true, data: "Feedback succesfully submitted" });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
