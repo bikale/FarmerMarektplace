@@ -57,3 +57,21 @@ export const getProducts = (farmerid) => {
     }
   };
 };
+
+//action for customer to give feedback and rating for the service
+
+export const giveFeedback = ({ farmerid, comment, rate }) => {
+  // change the rate value by substracting 2 to 0 -1 and 1
+  return async (dispatch) => {
+    try {
+      const {
+        data: { data },
+      } = await axios.patch(`/customers/feedbacks/${farmerid}`, {
+        comment,
+        rate,
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+};
