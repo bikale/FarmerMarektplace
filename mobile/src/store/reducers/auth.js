@@ -1,9 +1,4 @@
-import {
-  AUTHENTICATE,
-  LOGIN,
-  LOGOUT,
-  SIGNUP,
-} from "../actionTypes/actionTypes";
+import { AUTHENTICATE, LOGIN, LOGOUT } from "../actionTypes/actionTypes";
 
 const initialState = { token: null };
 

@@ -5,6 +5,7 @@ import FarmerScreen from "../screens/Shop/FarmerScreen";
 import ProductScreen from "../screens/Shop/ProductScreen";
 import CartScreen from "../screens/Shop/CartScreen";
 import CheckoutScreen from "../screens/Shop/CheckoutScreen";
+import OrdersScreen from "../screens/Shop/OrdersScreen";
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,11 @@ function ShopNavigator() {
         name="CHECKOUT"
         component={CheckoutScreen}
         options={{ title: "CHECKOUT" }}
+      />
+      <Stack.Screen
+        name="ORDERS"
+        component={OrdersScreen}
+        options={{ title: "ORDERS" }}
       />
     </Stack.Navigator>
   );

@@ -45,9 +45,21 @@ export const orderHistory = () => {
       const {
         data: { data },
       } = await axios.get(`/customers/orders`);
-      dispatch(orders(data));
+      const mappeddata = mapTheOrderForSectionList(data);
+      dispatch(orders(mappeddata));
     } catch (err) {
       console.log(err);
     }
   };
 };
+
+function mapTheOrderForSectionList(data) {
+  const mappedList = data.map((order) => {
+    return {
+      data: order.products.items,
+      title: order._id,
+      status: order.status,
+    };
+  });
+  return mappedList;
+}

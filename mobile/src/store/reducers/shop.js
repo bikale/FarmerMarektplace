@@ -2,6 +2,7 @@ import {
   FARMERSLIST,
   SELECTEDFARMER,
   PRODUCTS,
+  REMOVESHOP,
 } from "../actionTypes/actionTypes";
 
 const initialState = {
@@ -23,6 +24,8 @@ const reducer = (state = initialState, action) => {
       };
     case PRODUCTS:
       return { ...state, products: [...action.products] };
+    case REMOVESHOP:
+      return { ...state, ...initialState };
     default:
       return state;
   }
