@@ -15,31 +15,39 @@
     (matSortChange)="sortData($event)"
   >
     <!-- customer Name Column -->
-    <ng-container matColumnDef="cust_name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="cust_name">
-        Customer Name
+    <ng-container matColumnDef="order_number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="order_number">
+        Order No.
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      <td mat-cell *matCellDef="let element">{{ element._id }}</td>
     </ng-container>
 
     <!-- order_number Column -->
-    <ng-container matColumnDef="order_number">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="order_number">
-        Order No
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="status">
+        Status
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.status }}</td>
     </ng-container>
 
     <!-- status Column -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="status">Status</th>
-      <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="quantity">
+        Quantity
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.products.quantity }}
+      </td>
     </ng-container>
 
     <!-- amount Column -->
-    <ng-container matColumnDef="amount">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="amount">Amount</th>
-      <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+    <ng-container matColumnDef="totalprice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="totalprice">
+        Totalprice
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.products.totalprice }}
+      </td>
     </ng-container>
 
     <!--add course button -->

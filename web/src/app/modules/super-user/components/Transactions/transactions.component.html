@@ -1,0 +1,53 @@
+<div class="userlist-table-container">
+  <mat-form-field class="filter-form">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ex. July 28"
+      #input
+    />
+  </mat-form-field>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- Order number Column -->
+    <ng-container matColumnDef="order_number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Order #</th>
+      <td mat-cell *matCellDef="let element">{{ element._id }}</td>
+    </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.products.quantity }}
+      </td>
+    </ng-container>
+
+    <!-- price Column -->
+    <ng-container matColumnDef="totalprice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Totalprice</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.products.totalprice }}
+      </td>
+    </ng-container>
+
+    <!-- status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+    </ng-container>
+    <!-- email Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of order</th>
+      <td mat-cell *matCellDef="let element">{{ element.orderedAt | date }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

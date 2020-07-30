@@ -28,3 +28,9 @@ export interface UsersList {
   role: string;
   status: string;
 }
+
+export interface ResetPassword {
+  email: string;
+  password: string;
+  resettoken: string;
+}

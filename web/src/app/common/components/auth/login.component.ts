@@ -3,6 +3,9 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
 import { first } from "rxjs/operators";
 import { Router } from "@angular/router";
+import { ApiResponse } from "../../_models/products";
+import { ForgetpassworddialogComponent } from "./forgetPassword/forgetpassworddialog.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: "app-login",
@@ -17,13 +20,18 @@ export class LoginComponent implements OnInit {
   constructor(
     formbuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
     this.loginform = formbuilder.group({
       email: ["", Validators.compose([Validators.required, Validators.email])],
       password: ["", Validators.required],
     });
   }
+  openforgetpasswordDialog() {
+    this.dialog.open(ForgetpassworddialogComponent);
+  }
+
   ngOnInit(): void {}
   onLogin() {
     // stop here if form is invalid
@@ -36,8 +44,8 @@ export class LoginComponent implements OnInit {
       .login(this.loginform.value)
       .pipe(first()) //pipe(first()) automatically unsubscribes from the observable after returning the first item
       .subscribe(
-        (data) => {
-          if (data["role"] == "super") {
+        (data: ApiResponse) => {
+          if (data.role == "super") {
             this.router.navigate(["super"]);
           } else {
             this.router.navigate(["/"]);

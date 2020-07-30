@@ -23,7 +23,7 @@ export class AccessGuard implements CanActivate {
     | boolean
     | UrlTree {
     const currentUser = this.authService.currentUserValue();
-
+    console.log(currentUser);
     if (currentUser && currentUser.role == "farmer") {
       // logged in so return true
       return true;

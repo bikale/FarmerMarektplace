@@ -13,6 +13,9 @@
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
           <super-users-list *ngIf="card.title == 'Users'"></super-users-list>
+          <app-transactions
+            *ngIf="card.title == 'Transactions'"
+          ></app-transactions>
           <super-request-log *ngIf="card.title == 'Requests Log'">
           </super-request-log>
         </mat-card-content>

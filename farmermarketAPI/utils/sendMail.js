@@ -49,3 +49,34 @@ exports.sendmail = async (
 
   return;
 };
+
+exports.forgetPasswordEmail = async (useremail, resetLink) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: process.env.EMAILADDRESS,
+      pass: process.env.EMAILPASSWORD, // email password
+    },
+  });
+
+  // if there is email for farmer the email will be for placing order n we have to send to farmer n customer
+  const resetLinkEmail = {
+    from: `"Farmer Market" <${process.env.EMAILADDRESS}>`,
+    to: useremail,
+    subject: "Reset password Link",
+    text: "Reset Your password",
+    html: `<strong>Reset password</strong> </br> <p>
+        <hr/>
+      You are receiving this email because you (or someone else) has requested to reset  a password.
+                  to reset your password password click this link  </br>
+                  <strong>  <a href=${resetLink}>${resetLink}</a></strong>
+      
+      </p><p>Thank You For using our service </p>`,
+  };
+
+  // send mail with defined transport object
+  await transporter.sendMail(resetLinkEmail);
+
+  return;
+};

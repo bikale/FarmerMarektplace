@@ -5,6 +5,7 @@ import { LoginComponent } from "./common/components/auth/login.component";
 import { SignupComponent } from "./common/components/auth/signup.component";
 import { AccessGuard } from "./common/guards/access.guard";
 import { SuperuserGuard } from "./common/guards/superuser.guard";
+import { ResetpasswordComponent } from "./common/components/auth/resetpassword/resetpassword.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
   },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
+  { path: "resetpassword/:resettoken", component: ResetpasswordComponent },
   { path: "**", redirectTo: "", pathMatch: "full" },
 ];
 

@@ -26,7 +26,7 @@ export class SuperUserRootComponent implements OnInit {
           {
             title: "Transactions",
             cols: 4,
-            rows: 2,
+            rows: 3,
           },
           {
             title: "Requests Log",
@@ -39,12 +39,12 @@ export class SuperUserRootComponent implements OnInit {
       return [
         {
           title: "Users",
-          cols: 3,
+          cols: 2,
           rows: 3,
         },
         {
           title: "Transactions",
-          cols: 1,
+          cols: 2,
           rows: 3,
         },
         {

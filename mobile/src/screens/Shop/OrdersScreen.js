@@ -16,6 +16,7 @@ import MenuFooter from "../../components/MenuFooter";
 import OrderCard from "../../components/OrderCard";
 
 import Icon from "react-native-vector-icons/Entypo";
+import MatIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { useDispatch, useSelector } from "react-redux";
 import { orderHistory } from "../../store/actions/order";
@@ -54,19 +55,27 @@ const OrdersScreen = () => {
         )}
         renderSectionFooter={({ section: { status, farmerid } }) => (
           <View style={styles.sectionFooter}>
-            <Text style={styles.footertext}>status {status}</Text>
+            <View style={{ flexDirection: "column", alignItems: "center" }}>
+              <Text>status</Text>
+              <Text style={styles.footertext}>{status}</Text>
+            </View>
 
-            <TouchableOpacity
-              onPress={() => {
-                setFeedback((prevState) => ({
-                  ...prevState,
-                  show: true,
-                  farmerid: farmerid,
-                })); // farmer id to give feedback
-              }}
-            >
-              <Text style={styles.rateFarmerBtn}>Rate farmer</Text>
-            </TouchableOpacity>
+            {status == "complete" && (
+              <TouchableOpacity
+                onPress={() => {
+                  setFeedback((prevState) => ({
+                    ...prevState,
+                    show: true,
+                    farmerid: farmerid,
+                  })); // farmer id to give feedback
+                }}
+              >
+                <View style={{ flexDirection: "column", alignItems: "center" }}>
+                  <MatIcon name="comment-multiple-outline" size={31} />
+                  <Text>Give us your feedback</Text>
+                </View>
+              </TouchableOpacity>
+            )}
           </View>
         )}
       />
