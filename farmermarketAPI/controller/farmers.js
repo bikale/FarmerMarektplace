@@ -3,6 +3,7 @@ const Product = require("../model/products");
 const Order = require("../model/orders");
 const { Storage } = require("@google-cloud/storage");
 const path = require("path");
+const { sendmail } = require("../utils/sendMail");
 
 // @desc    Create Product
 // @route   Post /api/v1/farmermarket/farmers/products
@@ -70,24 +71,28 @@ exports.getProducts = async (req, res) => {
 
 exports.checkOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ farmer: "5f03f8e2c3b2d99ffec3a81c" });
+    const orders = await Order.find({ farmer: req.user._id });
     res.status(200).json({ success: true, data: orders });
   } catch (err) {
     res.status(400).json({ success: false, message: err.message });
   }
 };
 // @desc      Post update order status pending =>r eady => complete
-// @route     Post /api/v1/farmermarket/farmers/orders/:order_number
+// @route     Patch /api/v1/farmermarket/farmers/orders/:order_number
 // @access    Private
 
 exports.updateOrder = async (req, res) => {
   try {
-    const orders = await Order.updateOne(
-      { _id: "5f04aaf8ca8f9d34091353ce" },
-      { $set: { status: "ready" } }
-    );
-    res.status(200).json({ success: true, data: orders });
+    const { order_number } = req.params;
+    const { status } = req.body;
+    await Order.updateOne({ _id: order_number }, { $set: { status: status } });
+
+    if (status == "complete") {
+      sendmail(req.user.email, null, order_number, "farmer adresses");
+    }
+
+    res.status(200).json({ success: true, data: "orders succefully updated" });
   } catch (err) {
-    res.status(400).json({ success: false, message: err.message });
+    res.status(500).json({ success: false, message: err.message });
   }
 };

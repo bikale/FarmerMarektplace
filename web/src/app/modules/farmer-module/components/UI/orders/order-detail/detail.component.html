@@ -1,22 +1,62 @@
-<h1 mat-dialog-title>Update Order Status</h1>
-<mat-dialog-content>
-  <mat-list role="list">
-    <mat-list-item role="listitem">{{ data.animal }}</mat-list-item>
-    <mat-list-item role="listitem">{{ data.animal }}</mat-list-item>
-    <mat-list-item role="listitem">{{ data.animal }}</mat-list-item>
-  </mat-list>
+<div class="orderDetailContainer" style="width: 25vw;">
+  <h1 mat-dialog-title>Update Order Status</h1>
+  <h3 mat-dialog-title>order no # {{ data._id }}</h3>
 
-  <h4>Basic mat-select</h4>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite food</mat-label>
-    <mat-select (change)="hello($event.target.value)">
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{ food.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Update</button>
-</mat-dialog-actions>
+  <mat-dialog-content>
+    <mat-list role="list" *ngFor="let item of data.products.items">
+      <mat-list-item role="listitem"
+        >{{ item.name }}
+        <span style="padding-right: 40px;">
+          <strong> ({{ item.quantity }})</strong></span
+        >
+      </mat-list-item>
+    </mat-list>
+    <hr />
+    <mat-list role="list">
+      <mat-list-item role="listitem"
+        >total quantity
+        <span style="padding-left: 40px;">
+          <strong>{{ data.products.quantity }}</strong></span
+        >
+      </mat-list-item>
+
+      <mat-list-item role="listitem"
+        >total price
+        <span style="padding-left: 40px;">
+          <strong>{{ data.products.totalprice }}</strong></span
+        >
+      </mat-list-item>
+      <mat-list-item role="listitem"
+        >order status
+        <span style="padding-left: 40px;">
+          <strong>{{ data.status }}</strong></span
+        >
+      </mat-list-item>
+    </mat-list>
+    <hr />
+    <h4>Update order status</h4>
+
+    <mat-form-field appearance="fill" style="width: 75%;">
+      <mat-label>Order status</mat-label>
+      <mat-select [formControl]="statusUpdateControl" required>
+        <mat-option *ngFor="let status of orderStatus" [value]="status.value">
+          {{ status.viewValue }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="statusUpdateControl.hasError('required')"
+        >Please choose a status</mat-error
+      >
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="'close'">Cancel</button>
+    <button
+      mat-button
+      [mat-dialog-close]="statusUpdateControl.value"
+      (click)="updateOrderStatus()"
+      [disabled]="!statusUpdateControl.valid"
+    >
+      Update
+    </button>
+  </mat-dialog-actions>
+</div>

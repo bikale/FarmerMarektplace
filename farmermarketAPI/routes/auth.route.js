@@ -17,7 +17,7 @@ route.get("/users/:email", checkEmailExist);
 
 route.get("/me", protect, getMe);
 
-route.post("/forgotpassword", forgotPassword);
-route.put("/resetpassword/:resettoken", resetPassword);
+route.patch("/forgotpassword", forgotPassword);
+route.patch("/resetpassword/:resettoken", resetPassword);
 
 module.exports = route;

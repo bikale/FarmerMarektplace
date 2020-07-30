@@ -9,10 +9,16 @@ const {
   getProducts,
 } = require("../controller/farmers");
 
-route.post("/products", protect, multer().single("image"), addProduct);
-route.get("/products", protect, getProducts);
+route.post(
+  "/products",
+  protect,
+  authorize("farmer"),
+  multer().single("image"),
+  addProduct
+);
+route.get("/products", protect, authorize("farmer"), getProducts);
 
-route.get("/orders", protect, checkOrders);
-route.post("/orders/:order_number", protect, updateOrder);
+route.get("/orders", protect, authorize("farmer"), checkOrders);
+route.patch("/orders/:order_number", protect, authorize("farmer"), updateOrder);
 
 module.exports = route;

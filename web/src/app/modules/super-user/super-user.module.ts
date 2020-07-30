@@ -10,6 +10,7 @@ import { SuperUserRootComponent } from "./components/super-user-root/super-user-
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserEditDialogComponent } from './components/users-list/user-edit-dialog/user-edit-dialog.component';
 import { RequestLogComponent } from './components/logs/request-log.component';
+import { TransactionsComponent } from './components/Transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { RequestLogComponent } from './components/logs/request-log.component';
     UsersListComponent,
     UserEditDialogComponent,
     RequestLogComponent,
+    TransactionsComponent,
   ],
   imports: [
     CommonModule,

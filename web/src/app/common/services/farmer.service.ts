@@ -28,4 +28,33 @@ export class FarmerService {
   addProduct(product) {
     return this.http.post(`${this.farmerUrl}/products`, product);
   }
+
+  getOrders() {
+    return this.http.get(`${this.farmerUrl}/orders`).pipe(
+      map((orders) => {
+        return orders;
+      }),
+      catchError((err) => {
+        // console.log("error caught in service");
+        // console.error(err);
+        //Handle the error here
+        return throwError(err); //Rethrow it back to component
+      })
+    );
+  }
+  updateOrders(ordernumber: string, status: string) {
+    return this.http
+      .patch(`${this.farmerUrl}/orders/${ordernumber}`, { status })
+      .pipe(
+        map((data) => {
+          return data;
+        }),
+        catchError((err) => {
+          // console.log("error caught in service");
+          // console.error(err);
+          //Handle the error here
+          return throwError(err); //Rethrow it back to component
+        })
+      );
+  }
 }

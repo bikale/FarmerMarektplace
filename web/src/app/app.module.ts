@@ -12,9 +12,11 @@ import { AppComponent } from "./app.component";
 import { LoginComponent } from "./common/components/auth/login.component";
 import { SignupComponent } from "./common/components/auth/signup.component";
 import { HttpRequestInterceptor } from "./common/interceptors/http.interceptor";
+import { ForgetpassworddialogComponent } from './common/components/auth/forgetPassword/forgetpassworddialog.component';
+import { ResetpasswordComponent } from './common/components/auth/resetpassword/resetpassword.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignupComponent],
+  declarations: [AppComponent, LoginComponent, SignupComponent, ForgetpassworddialogComponent, ResetpasswordComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

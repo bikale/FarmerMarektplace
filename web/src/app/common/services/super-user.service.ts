@@ -19,4 +19,7 @@ export class SuperUserService {
   getRequestLogs() {
     return this.http.get(`${this.superUrl}/logs`);
   }
+  getOrderTransactions() {
+    return this.http.get(`${this.superUrl}/transactions`);
+  }
 }

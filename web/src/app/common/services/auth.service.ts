@@ -3,7 +3,12 @@ import { HttpClient } from "@angular/common/http";
 import { of, Observable, timer, BehaviorSubject, throwError } from "rxjs";
 import { debounceTime, switchMap, map, catchError } from "rxjs/operators";
 
-import { User, Registrationform, LoginCredential } from "../_models/user";
+import {
+  User,
+  Registrationform,
+  LoginCredential,
+  ResetPassword,
+} from "../_models/user";
 import { error } from "@angular/compiler/src/util";
 
 @Injectable({
@@ -92,5 +97,36 @@ export class AuthService {
   //get user profile -name pictures
   getMe() {
     return this.http.get(`${this.authUrl}/me`);
+  }
+
+  forgetPassword(email: string) {
+    return this.http.patch(`${this.authUrl}/forgotpassword`, { email });
+  }
+  resetPassword({ email, password, resettoken }: ResetPassword) {
+    return this.http
+      .patch(`${this.authUrl}/resetpassword/${resettoken}`, {
+        email,
+        password,
+      })
+      .pipe(
+        map((user) => {
+          // store user details and jwt token in local storage
+          localStorage.setItem(
+            "accesstoken",
+            JSON.stringify({ token: user["token"], role: user["role"] })
+          );
+          this.currentUserSubject.next({
+            token: user["token"],
+            role: user["role"],
+          }); //notify all subscribers that the user has logged in.
+          return user;
+        }),
+        catchError((err) => {
+          // console.log("error caught in service");
+          // console.error(err);
+          //Handle the error here
+          return throwError(err); //Rethrow it back to component
+        })
+      );
   }
 }

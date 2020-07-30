@@ -12,7 +12,7 @@ exports.getFarmers = async (req, res, next) => {
     let farmers = await User.find(
       { role: "farmer" },
       { firstname: 1, lastname: 1, farmerInfo: 1 } // projecting  the necessary fields
-    );
+    ).sort({ "farmerInfo.rating": -1 });
 
     res.status(200).json({ success: true, data: farmers });
   } catch (err) {
@@ -39,16 +39,18 @@ exports.getFarmerProduct = async (req, res, next) => {
 exports.addToCart = async (req, res, next) => {
   try {
     await User.updateOne(
-      { _id: "5f0417ceaec98ec6367e5f2c" },
+      { _id: req.user._id },
       {
         $push: {
           "customerInfo.cart": {
-            productId: "5f040a6b296ab5b247755855",
+            ...req.body,
           },
         },
       }
     );
-    res.status(200).json({ success: true, data: "created" });
+    res
+      .status(200)
+      .json({ success: true, data: "item is added to cart succesffuly" });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -60,13 +62,13 @@ exports.addToCart = async (req, res, next) => {
 
 exports.getUserCart = async (req, res, next) => {
   try {
-    let user = await User.findById("5f0417ceaec98ec6367e5f2c");
+    let user = await User.findById(req.user._id);
 
-    let cartList = await user
-      .populate("customerInfo.cart.productId")
-      .execPopulate();
+    // let cartList = await user
+    //   .populate("customerInfo.cart.productId")
+    //   .execPopulate();
 
-    res.status(200).json({ success: true, data: user });
+    res.status(200).json({ success: true, data: user.customerInfo.cart });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -92,6 +94,14 @@ exports.placeOrder = async (req, res, next) => {
     const { email } = await User.findOne({ _id: farmerid }); // get the farmer remail
 
     await sendmail(req.user.email, email, order._id);
+    //update customer inventory after the customer placed an order
+
+    carts.map(async (item) => {
+      await Products.updateOne(
+        { farmer: farmerid, name: item.name },
+        { $inc: { quantity: -item.quantity } }
+      );
+    });
 
     res.status(200).json({ success: true, data: "order succesfully placed" });
   } catch (err) {

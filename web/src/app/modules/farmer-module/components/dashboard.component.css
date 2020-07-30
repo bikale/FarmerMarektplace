@@ -41,7 +41,7 @@
   border-radius: 5px;
 }
 .navbar-user-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-image: url("https://storage.googleapis.com/farmermarket/defaultprofile.png");
   background-size: cover;
   box-shadow: 4px 3px 6px 0 rgba(0, 0, 0, 0.2);
 }

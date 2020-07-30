@@ -16,4 +16,13 @@ export interface Product {
 export interface ApiResponse {
   success: string;
   data: [];
+  role?: string;
+}
+
+export interface Orders {
+  _id: string;
+  customer: string;
+  farmer: number;
+  status: number;
+  products: { items: []; quantity: number; totalprice: number };
 }

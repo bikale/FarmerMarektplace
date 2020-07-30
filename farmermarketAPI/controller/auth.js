@@ -2,6 +2,7 @@ const User = require("../model/users.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const { forgetPasswordEmail } = require("../utils/sendMail");
 
 // @desc    Create User
 // @route   Post api/v1/farmermarket/auth/users
@@ -140,12 +141,13 @@ exports.getMe = async (req, res, next) => {
 };
 
 // @desc      Forgot password
-// @route     POST /api/v1/farmermarket/auth/forgotpassword
+// @route     Patch /api/v1/farmermarket/auth/forgotpassword
 // @access    Public
 
 exports.forgotPassword = async (req, res, next) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const { email } = req.body;
+    const user = await User.findOne({ email: email });
 
     if (!user) {
       return res.status(404).json({
@@ -165,19 +167,23 @@ exports.forgotPassword = async (req, res, next) => {
     const resetPasswordExpire = Date.now() + 10 * 60 * 1000; // 10 minute
 
     await User.updateOne(
-      { email: req.body.email },
+      { email: email },
       { $set: { resetPasswordToken, resetPasswordExpire } }
     );
 
-    // Create reset url
-    const resetUrl = `${req.protocol}://${req.get(
-      "host"
-    )}/api/v1/farmermarket/auth/resetpassword/${resetToken}`;
+    const resetLink = `http://localhost:4200/resetpassword/${resetToken}`;
 
-    const message = `You are receiving this email because you (or someone else) has requested to reset  a password.
-                     to reset password click this link \n\n ${resetUrl}`;
+    forgetPasswordEmail(email, resetLink);
 
-    res.status(200).json({ success: true, data: message });
+    // // Create reset url
+    // const resetUrl = `${req.protocol}://${req.get(
+    //   "host"
+    // )}/api/v1/farmermarket/auth/resetpassword/${resetToken}`;
+
+    // const message = `You are receiving this email because you (or someone else) has requested to reset  a password.
+    //                  to reset password click this link \n\n ${resetUrl}`;
+
+    res.status(200).json({ success: true, data: "Link sent in email" });
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -198,7 +204,7 @@ exports.resetPassword = async (req, res, next) => {
       .digest("hex");
     const user = await User.findOne({
       resetPasswordToken,
-      resetPasswordExpire: { $gt: Date.now() },
+      resetPasswordExpire: { $gt: Date.now() }, // check the token expiration time
     });
     if (!user) {
       return res.status(400).json({

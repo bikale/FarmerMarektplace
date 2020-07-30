@@ -68,7 +68,9 @@
             login
           </button>
           <div style="padding-top: 20px;">
-            <a mat-button (click)="(null)">Forget password ?</a>
+            <a mat-button (click)="openforgetpasswordDialog()"
+              >Forget password ?</a
+            >
           </div>
           <div style="padding-top: 70px;">
             <a mat-button [routerLink]="['/signup']">Create an account</a>

@@ -41,7 +41,7 @@
   border-radius: 5px;
 }
 .navbar-user-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-image: url("https://cdn4.iconfinder.com/data/icons/flatfaces-everyday-people-circular/125/flatfaces8-512.png");
   background-size: cover;
   box-shadow: 4px 3px 6px 0 rgba(0, 0, 0, 0.2);
 }

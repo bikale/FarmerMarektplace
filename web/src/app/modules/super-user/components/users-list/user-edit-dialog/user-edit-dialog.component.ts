@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { DialogData } from "src/app/modules/farmer-module/components/UI/orders/order-detail/detail.component";
 import { SuperUserService } from "src/app/common/services/super-user.service";
 
 @Component({

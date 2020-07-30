@@ -1,7 +1,9 @@
 const User = require("../model/users.js");
+const Order = require("../model/orders");
 const fs = require("fs");
 const readline = require("readline");
 const path = require("path");
+
 // @desc    GET Users
 // @route   Post /api/v1/farmermarket/super/users
 // @access  Private
@@ -37,6 +39,9 @@ exports.changeStatus = async (req, res, next) => {
   }
 };
 
+// @desc    Get all request logs
+// @route   GET /api/v1/farmermarket/super/logs
+// @access  Private
 exports.requestLog = async (req, res, next) => {
   try {
     const requestLogs = [];
@@ -59,6 +64,21 @@ exports.requestLog = async (req, res, next) => {
         success: true,
         data: requestLogs,
       });
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// @desc    Get all order transactions
+// @route   GET /api/v1/farmermarket/super/transactions
+// @access  Private
+exports.transactions = async (req, res, next) => {
+  try {
+    const transactions = await Order.find();
+    res.status(200).json({
+      success: true,
+      data: transactions,
     });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
