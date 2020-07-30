@@ -142,7 +142,7 @@ exports.getMe = async (req, res, next) => {
 
 // @desc      Forgot password
 // @route     Patch /api/v1/farmermarket/auth/forgotpassword
-// @access    Public
+// @access    Private
 
 exports.forgotPassword = async (req, res, next) => {
   try {
@@ -155,6 +155,7 @@ exports.forgotPassword = async (req, res, next) => {
         message: "There is no user with this email",
       });
     }
+
     const resetToken = crypto.randomBytes(20).toString("hex"); //this token will send to the user
 
     // Hash Token and set to resetPasswordToken field in db
@@ -171,7 +172,9 @@ exports.forgotPassword = async (req, res, next) => {
       { $set: { resetPasswordToken, resetPasswordExpire } }
     );
 
-    const resetLink = `http://localhost:4200/resetpassword/${resetToken}`;
+    const resetLink = `${req.protocol}://${req.get(
+      "host"
+    )}/resetpassword/${resetToken}`;
 
     forgetPasswordEmail(email, resetLink);
 
@@ -194,7 +197,7 @@ exports.forgotPassword = async (req, res, next) => {
 
 // @desc      Reset password
 // @route     PUT /api/v1/farmermarket/auth/resetpassword/:resettoken
-// @access    Public
+// @access    Private
 exports.resetPassword = async (req, res, next) => {
   try {
     // Get hashed version of token from the user reset url sent
@@ -202,6 +205,7 @@ exports.resetPassword = async (req, res, next) => {
       .createHash("sha256")
       .update(req.params.resettoken)
       .digest("hex");
+
     const user = await User.findOne({
       resetPasswordToken,
       resetPasswordExpire: { $gt: Date.now() }, // check the token expiration time

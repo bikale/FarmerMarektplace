@@ -32,15 +32,15 @@ app.use(cors());
 app.use(cookieParser());
 
 //Set morgan logger middleware
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
-app.use(
-  morgan(":method :url  :response-time :date[web]", {
-    stream: accessLogStream,
-  })
-);
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "access.log"),
+//   { flags: "a" }
+// );
+// app.use(
+//   morgan(":method :url  :response-time :date[web]", {
+//     stream: accessLogStream,
+//   })
+// );
 
 //Mount router
 app.use("/api/v1/farmermarket/auth", auth);
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
   res.status(404).json({ success: false, message: "Resource not found" });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 const MongoURI = process.env.MongoURI || "";
 mongoose
   .connect(MongoURI, {

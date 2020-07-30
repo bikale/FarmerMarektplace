@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root",
 })
 export class SuperUserService {
-  private superUrl = "http://localhost:5000/api/v1/farmermarket/super";
+  private superUrl = "http://localhost:8080/api/v1/farmermarket/super";
   constructor(private http: HttpClient) {}
 
   getUserAccount() {

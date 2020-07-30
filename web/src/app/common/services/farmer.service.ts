@@ -8,7 +8,7 @@ import { Product } from "../_models/products";
   providedIn: "root",
 })
 export class FarmerService {
-  private farmerUrl = "http://localhost:5000/api/v1/farmermarket/farmers";
+  private farmerUrl = "http://localhost:8080/api/v1/farmermarket/farmers";
   constructor(private http: HttpClient) {}
 
   getProducts() {

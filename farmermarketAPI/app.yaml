@@ -1,4 +1,4 @@
-runtime: nodejs12
+runtime: nodejs
+env: flex
 env_variables:
   MongoURI: mongodb+srv://fsgb:fsgb@cluster0-vzv7t.mongodb.net/farmermarket?retryWrites=true&w=majority
-  PORT: 5000
