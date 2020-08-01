@@ -20,7 +20,7 @@ export class AuthService {
   // don't store the current value and only emit values that are published after a subscription is created.
   private currentUserSubject: BehaviorSubject<User>;
 
-  private authUrl = "http://localhost:8080/api/v1/farmermarket/auth";
+  private authUrl = "https://farmermarketfinal.uc.r.appspot.com/api/v1/farmermarket/auth";
   private farmerUrl = "http://localhost:8080/api/v1/farmermarket/farmers";
 
   constructor(private http: HttpClient) {
