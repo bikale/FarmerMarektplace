@@ -316,3 +316,11 @@ GET /api/v1/farmermarket/super/logs  74.948 Wed, 19 Aug 2020 04:26:11 GMT
 GET /api/v1/farmermarket/super/users  74.455 Wed, 19 Aug 2020 04:26:33 GMT
 GET /api/v1/farmermarket/super/transactions  46.951 Wed, 19 Aug 2020 04:26:33 GMT
 GET /api/v1/farmermarket/super/logs  23.294 Wed, 19 Aug 2020 04:26:33 GMT
+GET /public/favicon.ico  0.856 Wed, 19 Aug 2020 04:27:22 GMT
+GET /api/v1/farmermarket/farmers/orders  58.426 Wed, 19 Aug 2020 04:28:16 GMT
+GET /api/v1/farmermarket/farmers/products  51.666 Wed, 19 Aug 2020 04:28:16 GMT
+GET /public/favicon.ico  0.342 Wed, 19 Aug 2020 04:28:16 GMT
+GET /api/v1/farmermarket/farmers/orders  25.498 Wed, 19 Aug 2020 04:28:37 GMT
+GET /api/v1/farmermarket/farmers/products  28.016 Wed, 19 Aug 2020 04:28:37 GMT
+GET /api/v1/farmermarket/farmers/orders  83.175 Wed, 19 Aug 2020 04:29:33 GMT
+GET /api/v1/farmermarket/farmers/products  86.301 Wed, 19 Aug 2020 04:29:34 GMT
