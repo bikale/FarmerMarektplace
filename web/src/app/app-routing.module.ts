@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: "",
     loadChildren: () =>
-      import("./modules/farmer-module/farmerdashboard.module").then(
+      import("src/app/modules/farmer-module/farmerdashboard.module").then(
         (module) => module.FarmerdashboardModule
       ),
     canActivate: [AccessGuard],
@@ -19,7 +19,7 @@ const routes: Routes = [
   {
     path: "super",
     loadChildren: () =>
-      import("./modules/super-user/super-user.module").then(
+      import("src/app/modules/super-user/super-user.module").then(
         (module) => module.SuperUserModule
       ),
     canActivate: [SuperuserGuard],

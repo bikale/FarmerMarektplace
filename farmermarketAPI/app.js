@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/public", express.static("public"));
+app.use("/", express.static("public"));
 
 // Cookie parser
 app.use(cookieParser());
@@ -50,12 +51,13 @@ app.use("/api/v1/farmermarket/customers", customers);
 app.use("/api/v1/farmermarket/super", superuser);
 
 app.get("/", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
+  res.sendFile(path.join(__dirname, "public/index.html"));
 });
 
 //404 handler
 app.use((req, res, next) => {
-  res.status(404).json({ success: false, message: "Resource not found" });
+  res.redirect("/");
+  // res.status(404).json({ success: false, message: "Resource not found" });
 });
 
 const PORT = process.env.PORT || 8080;
