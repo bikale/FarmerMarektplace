@@ -24,8 +24,11 @@ export class LoginComponent implements OnInit {
     public dialog: MatDialog
   ) {
     this.loginform = formbuilder.group({
-      email: ["", Validators.compose([Validators.required, Validators.email])],
-      password: ["", Validators.required],
+      email: [
+        "bikaleaberra@gmail.com",
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      password: ["qwerty", Validators.required],
     });
   }
   openforgetpasswordDialog() {

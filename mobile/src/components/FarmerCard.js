@@ -5,9 +5,7 @@ const FarmerCard = ({ farmerDetail: { firstname, lastname, farmerInfo } }) => {
   return (
     <View style={[styles.cardsContainer, styles.shadow]}>
       <View style={styles.farmerdetailContainer}>
-        <Text style={styles.farmernameText}>
-          {firstname} {lastname}
-        </Text>
+        <Text style={styles.farmernameText}>{firstname}</Text>
         <Text style={styles.numberofProducts}>
           200 <Text style={{ fontSize: 15 }}>products</Text>
         </Text>

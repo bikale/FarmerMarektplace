@@ -2,9 +2,9 @@ import { registerRootComponent } from "expo";
 import axios from "axios";
 import App, { store } from "./App";
 
-// axios.defaults.baseURL =
-//   "https://farmermarketapi.herokuapp.com/api/v1/farmermarket";
-axios.defaults.baseURL = "http://172.19.140.33:8080/api/v1/farmermarket";
+axios.defaults.baseURL =
+  "https://farmermarketfinal.uc.r.appspot.com/api/v1/farmermarket";
+// axios.defaults.baseURL = "http://172.19.140.33:8080/api/v1/farmermarket";
 
 axios.interceptors.request.use(
   (request) => {
