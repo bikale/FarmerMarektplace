@@ -13,10 +13,10 @@ const farmers = require("./routes/farmers.route");
 const superuser = require("./routes/super-user.route");
 
 const app = express();
-// app.set("trust proxy", true);
-// require("@google-cloud/debug-agent").start({
-//   serviceContext: { enableCanary: true },
-// });
+app.set("trust proxy", true);
+require("@google-cloud/debug-agent").start({
+  serviceContext: { enableCanary: true },
+});
 
 //load env vars
 require("dotenv").config({ path: "./config/.env" });
