@@ -1,7 +1,7 @@
-farmermarketAPI/node_modules
-farmermarketAPI/config
-farmermarketAPI/app.yaml
-farmermarketAPI/.vscode
+node_modules
+config
+app.yaml
+.vscode
 mobile/node_modules
 mobile/.vscode
 web/node_modules
