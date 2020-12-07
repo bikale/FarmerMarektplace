@@ -1,7 +1,7 @@
 node_modules/
 config/
 app.yaml
-
+.vscode
 mobile/node_modules
 mobile/.vscode
 web/node_modules

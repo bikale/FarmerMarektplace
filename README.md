@@ -6,4 +6,4 @@
 
 ## cloud deployed link
 
-> google cloud link [https://farmermarketfinal.uc.r.appspot.com](https://farmermarketfinal.uc.r.appspot.com)
+> google cloud link [https://farmer-market.herokuapp.com/](https://farmer-market.herokuapp.com/)

@@ -24,8 +24,10 @@ export class AuthService {
   //   "https://farmermarketfinal.uc.r.appspot.com/api/v1/farmermarket/auth";
   // private farmerUrl =
   //   "https://farmermarketfinal.uc.r.appspot.com/api/v1/farmermarket/farmers";
-  private authUrl = "http://localhost:8080/api/v1/farmermarket/auth";
-  private farmerUrl = "http://localhost:8080/api/v1/farmermarket/farmers";
+  private authUrl =
+    "https://farmer-market.herokuapp.com/api/v1/farmermarket/auth";
+  private farmerUrl =
+    "https://farmer-market.herokuapp.com/api/v1/farmermarket/farmers";
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
