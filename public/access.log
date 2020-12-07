@@ -2,3 +2,17 @@ POST /api/v1/farmermarket/auth/login  252.481 Mon, 07 Dec 2020 17:11:27 GMT
 GET /api/v1/farmermarket/auth/me  24.313 Mon, 07 Dec 2020 17:11:28 GMT
 GET /api/v1/farmermarket/farmers/orders  33.697 Mon, 07 Dec 2020 17:11:28 GMT
 GET /api/v1/farmermarket/farmers/products  25.593 Mon, 07 Dec 2020 17:11:28 GMT
+GET /api/v1/farmermarket/auth/me  169.598 Mon, 07 Dec 2020 22:01:16 GMT
+GET /api/v1/farmermarket/farmers/orders  132.682 Mon, 07 Dec 2020 22:01:16 GMT
+GET /api/v1/farmermarket/farmers/products  93.907 Mon, 07 Dec 2020 22:01:16 GMT
+GET /api/v1/farmermarket/farmers/orders  46.182 Mon, 07 Dec 2020 22:01:21 GMT
+GET /api/v1/farmermarket/farmers/products  25.807 Mon, 07 Dec 2020 22:01:21 GMT
+GET /api/v1/farmermarket/auth/me  22.055 Mon, 07 Dec 2020 22:01:48 GMT
+GET /api/v1/farmermarket/farmers/orders  24.573 Mon, 07 Dec 2020 22:01:48 GMT
+GET /api/v1/farmermarket/farmers/products  23.762 Mon, 07 Dec 2020 22:01:49 GMT
+POST /api/v1/farmermarket/auth/login  180.435 Mon, 07 Dec 2020 22:01:58 GMT
+GET /api/v1/farmermarket/auth/me  39.459 Mon, 07 Dec 2020 22:01:58 GMT
+GET /api/v1/farmermarket/farmers/orders  32.224 Mon, 07 Dec 2020 22:01:58 GMT
+GET /api/v1/farmermarket/farmers/products  25.605 Mon, 07 Dec 2020 22:01:58 GMT
+GET /api/v1/farmermarket/farmers/orders  26.230 Mon, 07 Dec 2020 22:02:02 GMT
+GET /api/v1/farmermarket/farmers/products  23.084 Mon, 07 Dec 2020 22:02:02 GMT
