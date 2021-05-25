@@ -10,6 +10,7 @@ import { AddProductDialogComponent } from "../add-product-dialog/add-product-dia
 import { FarmerService } from "src/app/common/services/farmer.service";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: "app-products-table",
@@ -26,7 +27,11 @@ export class ProductsTableComponent {
   ];
   dataSource;
   sortedData: MatTableDataSource<Product>;
-  constructor(public dialog: MatDialog, private farmerService: FarmerService) {
+  constructor(
+    public dialog: MatDialog,
+    private farmerService: FarmerService,
+    private sanitizer: DomSanitizer
+  ) {
     // this.sortedData = this.dataSource.slice();
   }
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -82,6 +87,12 @@ export class ProductsTableComponent {
     );
     this.sortedData = new MatTableDataSource(filteredData);
     this.sortedData.paginator = this.paginator;
+  }
+
+  imageDomeSantizer(imgvalue: string) {
+    let imgData = "data:image/*;base64," + imgvalue;
+
+    return this.sanitizer.bypassSecurityTrustUrl(imgData);
   }
 }
 const ELEMENT_DATA: Product[] = [];

@@ -1,5 +1,6 @@
 const route = require("express").Router();
 const multer = require("multer");
+const upload = multer({ dest: "public/images" });
 const { protect, authorize } = require("../middleware/auth");
 
 const {
@@ -13,7 +14,8 @@ route.post(
   "/products",
   protect,
   authorize("farmer"),
-  multer().single("image"),
+  // multer().single("image"),
+  upload.single("image"),
   addProduct
 );
 route.get("/products", protect, authorize("farmer"), getProducts);
