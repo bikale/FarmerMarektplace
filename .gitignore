@@ -6,7 +6,7 @@ mobile/node_modules
 mobile/.vscode
 web/node_modules
 web/.vscode
-
+web/dist
 
 # OSX
 #

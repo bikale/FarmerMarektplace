@@ -52,3 +52,39 @@
 .menu-tab-list {
   color: black;
 }
+
+.app-container > div > p {
+  visibility: hidden;
+}
+
+@media (max-width: 800px) {
+  .app-container {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .app-container > div {
+    text-align: center;
+    max-width: 90vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .app-container > div > p {
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem;
+    visibility: visible;
+  }
+}
