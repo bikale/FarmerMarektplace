@@ -41,3 +41,19 @@ mat-grid-tile {
 td {
   padding: 8px;
 }
+
+@media (max-width: 700px) {
+  .register-card {
+    left: 60px;
+    right: 60px;
+    top: 30%;
+    transform: translateY(-30%);
+  }
+}
+@media (max-width: 500px) {
+  .register-card {
+    left: 30px;
+    right: 30px;
+    top: 30%;
+  }
+}

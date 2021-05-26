@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
 import { first } from "rxjs/operators";
@@ -17,6 +17,21 @@ export class LoginComponent implements OnInit {
   loginform;
   loading;
   error: any;
+  public innerWidth: any;
+  public totalSpan = 4;
+  public leftSpan = 2;
+  public rightSpan = 2;
+  @HostListener("window:resize", ["$event"])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 700) {
+      this.totalSpan = 2;
+      this.leftSpan = 0;
+    } else {
+      this.totalSpan = 4;
+      this.leftSpan = 2;
+    }
+  }
   constructor(
     formbuilder: FormBuilder,
     private authService: AuthService,
@@ -35,7 +50,16 @@ export class LoginComponent implements OnInit {
     this.dialog.open(ForgetpassworddialogComponent);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 700) {
+      this.totalSpan = 2;
+      this.leftSpan = 0;
+    } else {
+      this.totalSpan = 4;
+      this.leftSpan = 2;
+    }
+  }
   onLogin() {
     // stop here if form is invalid
     if (this.loginform.invalid) {

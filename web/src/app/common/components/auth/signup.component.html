@@ -1,7 +1,11 @@
 <body>
   <mat-card class="register-card">
-    <mat-grid-list cols="4" rowHeight="70vh">
-      <mat-grid-tile colspan="2">
+    <mat-grid-list [cols]="totalSpan" rowHeight="70vh">
+      <mat-grid-tile [colspan]="leftSpan" class="register-panel-right">
+        Welcome to Farmer market
+        <mat-icon>market</mat-icon>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="rightSpan">
         <form
           [formGroup]="sign_up_form"
           (ngSubmit)="onsignUp()"
@@ -168,16 +172,11 @@
             register
           </button>
 
-          <div style="padding-top: 70px;">
+          <div style="padding-top: 70px">
             Already have an account ?
             <a [routerLink]="['/login']">Login</a>
           </div>
         </form>
-      </mat-grid-tile>
-
-      <mat-grid-tile colspan="2" class="register-panel-right">
-        Welcome to Farmer market
-        <mat-icon>market</mat-icon>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import {
   FormBuilder,
   Validators,
@@ -23,6 +23,21 @@ export class SignupComponent {
   sign_up_form;
   error;
   loading;
+  public innerWidth: any;
+  public totalSpan = 4;
+  public leftSpan = 2;
+  public rightSpan = 2;
+  @HostListener("window:resize", ["$event"])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 950) {
+      this.totalSpan = 2;
+      this.leftSpan = 0;
+    } else {
+      this.totalSpan = 4;
+      this.leftSpan = 2;
+    }
+  }
   constructor(
     private formbuilder: FormBuilder,
     private authService: AuthService,
@@ -39,7 +54,18 @@ export class SignupComponent {
       ],
     });
   }
-
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 950) {
+      this.totalSpan = 2;
+      this.leftSpan = 0;
+    } else {
+      this.totalSpan = 4;
+      this.leftSpan = 2;
+    }
+  }
   get email() {
     return this.sign_up_form.get("email");
   }

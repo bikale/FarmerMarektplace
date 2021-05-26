@@ -1,8 +1,9 @@
 <body>
   <mat-card class="login-card">
-    <mat-grid-list cols="5" rowHeight="70vh">
-      <mat-grid-tile colspan="3" class="login-panel-left"> </mat-grid-tile>
-      <mat-grid-tile colspan="2">
+    <mat-grid-list [cols]="totalSpan" rowHeight="70vh">
+      <mat-grid-tile [colspan]="leftSpan" class="login-panel-left">
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="rightSpan">
         <form [formGroup]="loginform" (ngSubmit)="onLogin()" class="login-form">
           <p>
             <mat-error *ngIf="error">
@@ -67,12 +68,12 @@
           >
             login
           </button>
-          <div style="padding-top: 20px;">
+          <div style="padding-top: 20px">
             <a mat-button (click)="openforgetpasswordDialog()"
               >Forget password ?</a
             >
           </div>
-          <div style="padding-top: 70px;">
+          <div style="padding-top: 70px">
             <a mat-button [routerLink]="['/signup']">Create an account</a>
           </div>
         </form>

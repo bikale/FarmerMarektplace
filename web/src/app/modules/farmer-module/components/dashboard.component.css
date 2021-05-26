@@ -41,7 +41,7 @@
   border-radius: 5px;
 }
 .navbar-user-image {
-  background-image: url("https://lh4.googleusercontent.com/ZdKB0uOUkedg6lb0dj4xCSrWmbvUeBu2MJRQKf8mHZokjAZJr0oUUvBPaN6NclTF26ui8Dq4cIvcnA=w1920-h976");
+  background-image: url("../../../../assets/defaultprofile.png");
   background-size: cover;
   box-shadow: 4px 3px 6px 0 rgba(0, 0, 0, 0.2);
 }
