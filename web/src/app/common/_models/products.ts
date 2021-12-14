@@ -5,18 +5,17 @@ export interface PeriodicElement {
   symbol: string;
 }
 
+export interface ApiResponse {
+  success: string;
+  data: [];
+  role?: string;
+}
 export interface Product {
   name: string;
   price: number;
   quantity: number;
   photo: string;
   description?: string;
-}
-
-export interface ApiResponse {
-  success: string;
-  data: [];
-  role?: string;
 }
 
 export interface Orders {
